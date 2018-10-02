@@ -1,0 +1,40 @@
+<div id="survey-first-ques-container" class="animated fadeIn">
+    <h3>2019 ER Utilization Rewardable Activity Survey</h3>
+    <p>Earn Blue Rewards points and get your own personalized Quick Reference Guide when you test your knowledge about choosing the most appropriate place to get care.</p>
+    <h2>Your Doctor</h2>
+    <p>Your regular doctor should be your first point of contact for your health needs.</p>
+    <p>Why is it important to have a regular doctor? (Select all that apply.)</p>
+    <form>
+        <input type="checkbox" name="first_Q_1" value="opt1" ng-click="insertAnswers($event)"> Knows your health history<br>
+        <input type="checkbox" name="first_Q_2" value="opt2" ng-click="insertAnswers($event)"> Helps you prevent or manage long-term conditions (like diabetes or asthma)<br>
+        <input type="checkbox" name="first_Q_3" value="opt3" ng-click="insertAnswers($event)"> Provides regular checkups<br><br>
+        <button type="button" class="btn-blue" ng-if="!showAnsweredInCorrectly" ng-click="submit($event)">Submit</button>
+    </form>
+    
+    <div class="answered-correctly" ng-if="showAnsweredCorrectly">
+        <br><br>
+        <b>You’re right — great job!</b>
+        <p>
+            There are many reasons why having a regular doctor is important. They know you and your health history. 
+            They can also help you manage any health issues you may have. And they provide regular checkups so 
+            you can stay up-to-date on vaccines, tests and other preventive care. Your primary doctor is your health 
+            care partner!
+        </p>
+        <br><br>
+        <button type="button" class="btn-blue">Continue</button>
+    </div>
+    
+    <div class="answered-incorrectly" ng-if="showAnsweredInCorrectly">
+        <br><br>
+        <b>Oops — all of these are correct answers.</b>
+        <p>
+            There are many reasons why having a regular doctor is important. They know you and your health history. 
+            They can also help you manage any health issues you may have. And they provide regular checkups so 
+            you can stay up-to-date on vaccines, tests and other preventive care.
+        </p>
+        <br><br>
+        <button type="button" class="btn-blue ">Continue to next question</button>
+    </div>
+
+    
+</div>
