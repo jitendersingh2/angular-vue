@@ -1,222 +1,69 @@
-angular.module('bcbsnc.med', [
-	'ui.router',
-	'ngAnimate',
-	'ngOnboarding',
-	'ipCookie',
-	'angular-data.DSCacheFactory',
-	'angularSpinner',
-	'LocalStorageModule',
-	'snap',
-	'med.constants',
-	'bcbsnc.blueConnect.med.constants.config',
-	'bcbsnc.blueConnect.factories.vendorSso',
-	'blueconnect.services.data-capture',
-	'bcbsnc.med.app',
-	'bcbsnc.med.alerts',
-	'bcbsnc.med.blueLink',
-	'bcbsnc.med.chat',
-	'bcbsnc.filters.alertsFilters',
-	'bcbsnc.tileDefinition.rtdmFilters',
-	'bcbsnc.tileDefinition.bluelinkFilters',
-	'bcbsnc.med.blueLinkItem',
-	'bcbsnc.med.blueRewards',
-	'bcbsnc.med.chooseInterests',
-	'bcbsnc.med.dashboard',
-	'bcbsnc.med.footer',
-	'bcbsnc.med.accountStatus',
-	'bcbsnc.med.healthNav',
-	'bcbsnc.med.inbox',
-	'bcbsnc.med.lightboxes',
-	'bcbsnc.med.mobileInterestsDrawer',
-	'bcbsnc.med.onboarding',
-	'bcbsnc.med.profile',
-	'bcbsnc.med.search',
-	'bcbsnc.med.statusPanel',
-	'bcbsnc.med.popoutContent',
-	'bcbsnc.med.popoutNav',
-	'bcbsnc.med.myInterests',
-	'bcbsnc.med.survey',
-	'bcbsnc.med.nav',
-	'bcbsnc.med.thingsYouShouldKnow',
-	'bcbsnc.med.tileAccountStatus',
-	'bcbsnc.med.tileAlereSso',
-	'bcbsnc.med.tileBasic',
-	'bcbsnc.med.tileBlueConnect',
-	'bcbsnc.med.tileBlueRewards',
-	'bcbsnc.med.tileDrawer',
-	'bcbsnc.med.tileExternalLink',
-	'bcbsnc.med.tileAdestinnLink',
-	'bcbsnc.med.tileFundBalance',
-	'bcbsnc.med.tileHsaBalance',
-	'bcbsnc.med.tileSilverFit',
-	'bcbsnc.med.tileSocialMedia',
-	'bcbsnc.med.tileVitals',
-	'bcbsnc.services.alertsFactory',
-	'bcbsnc.services.accountStatusFactory',
-	'bcbsnc.services.analyticsFactory',
-	'bcbsnc.services.benefitsFactory',
-	'bcbsnc.services.bcbsncFactory',
-	'bcbsnc.services.blueLinkFactory',
-	'bcbsnc.services.blueRewardsFactory',
-	'bcbsnc.services.campaignsFactory',
-	'bcbsnc.services.claimsFactory',
-	'bcbsnc.services.customizationsFactory',
-	'bcbsnc.services.fundBalanceFactory',
-	'bcbsnc.services.focusPriorityFactory',
-	'bcbsnc.services.healthNavFactory',
-	'bcbsnc.services.localStorageFactory',
-	'bcbsnc.services.mediaFeedFactory',
-	'bcbsnc.services.memberFactory',
-	'bcbsnc.services.memberSsoFactory',
-	'bcbsnc.services.navFactory',
-	'bcbsnc.services.numberService',
-	'bcbsnc.services.onboardingFactory',
-	'bcbsnc.services.optionsFactory',
-	'bcbsnc.services.paramService',
-	'bcbsnc.services.profileFactory',
-	'bcbsnc.services.routingFactory',
-	'bcbsnc.services.screenSizeFactory',
-	'bcbsnc.services.sessionFactory',
-	'bcbsnc.services.tileCategoryFactory',
-	'bcbsnc.services.tileDefinitionFactory',
-	'bcbsnc.services.tileDataFactory',
-	'bcbsnc.services.tileTopicFactory',
-	'bcbsnc.services.userPrefFactory',
-	'bcbsnc.services.userSubscriptionFactory',
-	'bcbsnc.services.rtdmFactory',
-	'bcbsnc.common.directiveHelperFactory',
-	'bcbsnc.directives.benefits',
-	'bcbsnc.directives.claims',
-	'bcbsnc.directives.claimsChart',
-	'bcbsnc.directives.dynamicView',
-	'bcbsnc.directives.heroImg',
-	'bcbsnc.directives.lightBox',
-	'bcbsnc.directives.lightBoxHeader',
-	'bcbsnc.directives.lightBoxTrigger',
-	'bcbsnc.directives.ngVisible',
-	'bcbsnc.directives.enterPressed',
-	'bcbsnc.directives.packery',
-	'bcbsnc.directives.packeryContainer',
-	'bcbsnc.directives.scrollTo',
-	'bcbsnc.directives.spinnerOnload',
-	'bcbsnc.directives.twitterTimeline',
-	'bcbsnc.directives.tileDecorator',
-	'bcbsnc.directives.accordionButton',
-	'bcbsnc.directives.tileFlip',
-	'bcbsnc.directives.windowResize',
-    'bcbsnc.directives.dropDownMenuAccessibility',
-	'templates'
-])
-	.config(['localStorageServiceProvider', function(localStorageServiceProvider){
-		localStorageServiceProvider.setPrefix('med');
-	}])
-	.config(['$uiViewScrollProvider', function($uiViewScrollProvider){
-		$uiViewScrollProvider.useAnchorScroll();
-	}])
-	.config(
-		/**
-		* Configures the routing for the application.
-		*
-		* @param $stateProvider - the stateProvider supplied by ui-router.
-		* @param $urlRouterProvider - the routeProvider supplied by ui-router.
-		*
-		* See also:
-		*
-		* https://github.com/angular-ui/ui-router/wiki
-		* @ngInject
-		*/
-		function configureRouting($stateProvider, $urlRouterProvider) {
-			$urlRouterProvider
-				.otherwise('/');
-			$stateProvider
-				.state('index', { url  : '/',
-					views: {
-						'mobile-interests-drawer': {templateUrl: 'tile-drawer/mobile-interests-drawer.html', controller: 'MobileInterestsDrawerCtrl'},
-						'nav-panel' : {
-							templateUrl: 'templates-common/nav.html',
-							controller: 'NavCtrl as nav',
-							resolve: NavCtrl.resolve // jshint ignore:line
-						},
-						'mobile-nav': {
-							templateUrl: 'templates-common/mobile-nav.html',
-							controller: 'NavCtrl as nav',
-							resolve: NavCtrl.resolve // jshint ignore:line
-						},
-						'top-nav-panel' : {
-							templateUrl: 'templates-common/top-nav.html',
-							controller: 'NavCtrl as nav',
-							resolve: NavCtrl.resolve // jshint ignore:line
-						},
-						'footer' : { templateUrl: 'templates-common/footer.html'},
-						"tile-list" : { templateUrl: 'dashboard/dashboard.html', controller : 'DashboardCtrl'},
-						"tile-drawer" : { templateUrl: 'tile-drawer/drawer.html', controller : 'TileDrawerCtrl'},
-						'popout-panel-nav': { templateUrl: 'popout-panel/navigation.html', controller: 'PopoutNavCtrl'},
-						'popout-panel-content' : { templateUrl: 'popout-panel/content.html', controller : 'PopoutContentCtrl'},
-						"alerts-panel"    : { templateUrl: 'alerts/alerts-list.html', controller : 'AlertsCtrl'},
-						"status-panel"    : { templateUrl: 'status-panel/status-panel.html', controller : 'StatusPanelCtrl'},
-						"lightboxes" : {templateUrl: 'lightboxes/lightboxes.html', controller: 'LightboxesCtrl'},
-						"onboarding" : {templateUrl: 'onboarding/onboarding.html', controller: 'OnboardingCtrl'}
-					}
-				})
-				.state('index.menu',{ url  : 'menu/:menu',
-					views: {
-						'popout-panel-content@': { templateUrl: 'popout-panel/content.html', controller : 'PopoutContentCtrl'},
-						'popout-panel-nav@': { templateUrl: 'popout-panel/navigation.html', controller: 'PopoutNavCtrl'}
-					}
-				})
-				.state('index.dashboard',{ url  : 'dashboard/:dashboard',
-					views: {
-						"tile-list@": { templateUrl: 'dashboard/dashboard.html', controller : 'DashboardCtrl'},
-						"tile-drawer@": { templateUrl: 'tile-drawer/drawer.html', controller : 'TileDrawerCtrl'}
-					}
-				})
-				.state('index.dashboard.menu',{ url  : '/menu/:menu',
-					views: {
-						'popout-panel-content@': { templateUrl: 'popout-panel/content.html', controller : 'PopoutContentCtrl'},
-						'popout-panel-nav@': { templateUrl: 'popout-panel/navigation.html', controller: 'PopoutNavCtrl'}
-					}
-				})
-				.state('index.dashboard.categories',{ url  : '/category/:category',
-					views: {
-						"tile-list@": { templateUrl: 'dashboard/dashboard.html', controller : 'DashboardCtrl'},
-						"tile-drawer@": { templateUrl: 'tile-drawer/drawer.html', controller : 'TileDrawerCtrl'}
-					}
-				})
-				.state('index.dashboard.categories.menu',{ url  : '/menu/:menu',
-					views: {
-						'popout-panel-content@': { templateUrl: 'popout-panel/content.html', controller : 'PopoutContentCtrl'},
-						'popout-panel-nav@': { templateUrl: 'popout-panel/navigation.html', controller: 'PopoutNavCtrl'}
-					}
-				});
-	}) /** end router configuration */ /** jshint ignore:end */
-	.config(['snapRemoteProvider', function(snapRemoteProvider){
-		/**
-		 * Angular-snap js /drawer configuration options
-		 */
-		// disable touchToDrag - screen drag causes issues with native back/forward
-		// browser drag features on some devices
-		snapRemoteProvider.globalOptions.touchToDrag = false;
+<!-- Desktop/tablet navigation-->
+<div class="hide-xt hide-ss hide-xs hide-sm">
+	<ul class="nav nav-pills nav-stacked">
+		<li ng-class="{active: !currentDashboard || currentDashboard == 'things-you-should-know' }" >
+			<a id="tysk" href="" ng-click="tyskClick()" tabindex="0">Things You Should Know</a>
+			<span class="arrow-nav"></span>
+		</li>
+		<li ng-class="{active: currentDashboard == 'my-interests' }">
+			<a id="my-interests" href="" ng-click="interestsClick()" tabindex="0">My Interests</a>
+			<span class="arrow-nav"></span>
+		</li>
+		<li ng-class="{active: currentDashboard == 'my-interests' }">
+			<a id="survey" href="" ng-click="surveyClick()" tabindex="0">Survey</a>
+			<span class="arrow-nav"></span>
+		</li>
+		<li>
+			<button id="edit-interests-btn" ng-click="editInterestsClick(categories)" ng-class="{active: !isCollapsed}" tabindex="0">
+				<div class="edit-interest">
+					<div class="edit-icon"></div>
+					<span class="edit-label">Edit My Interests</span>
+					<span class="edit-plus" ng-bind="isCollapsed ? '+' : '-'"></span>
+				</div>
+			</button>
+			<div collapse="isCollapsed">
+				<ul class="nav nav-pills nav-stacked">
+					<li ng-repeat="category in categories" ng-class="{active: currentCategory == category.route}" >
+						<a href="" ng-click="categoryClick(category)" ng-bind="category.title" tabindex="0"></a>
+						<div class="arrow-nav"></div>
+					</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+	<div class="interests-reminder" ng-show="currentDashboard == 'categories' && topicHasBeenClicked">
+		<div class="reminder-heading">
+			<div class="reminder-title">Reminder</div>
+			<div class="reminder-icon"><i class="fa fa-exclamation-circle"></i></div>
+		</div>
+		<div class="reminder-text">When you are finished selecting, click on the 'My Interests' button above to see what you have added.</div>
+	</div>
+</div>
 
-		//max px to allow for snap.js shelves
-		snapRemoteProvider.globalOptions.maxPosition = window.innerWidth;
-		snapRemoteProvider.globalOptions.minPosition = -Math.abs(window.innerWidth);
-
-	}]).run(['$rootScope', '$state', '$stateParams', '$window', 'ScreenSizeFactory', function($rootScope, $state, $stateParams, $window, ScreenSizeFactory){
-		//route change events
-		$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
-
-		});
-
-		$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-			//focus the tile container area for screen readers if a dashboard element was clicked
-			if(toParams && toParams.dashboard && ScreenSizeFactory.screenSize() == "desktop"){
-				var x = window.scrollX, y = window.scrollY;
-				$('#tile-list-container').attr('tabIndex', -1).focus();
-				window.scrollTo(x, y);
-			}
-		});
-
-		$rootScope.$on('$viewContentLoaded', function(){
-
-		});
-	}]);
+<!-- Mobile navigation: tile drawer via ( angular-snap / snap.js ) -->
+<div id="mobi-tile-nav" class="hide-md hide-ce hide-lg">
+	<div class="row">
+		<div class="col-xs-7" ng-class="{active: !currentDashboard || currentDashboard == 'things-you-should-know' }">
+			<a id="tysk-mobile"
+			   href="" ng-click="tyskClick()">Things You Should Know</a>
+		</div>
+		<div class="col-xs-5" ng-class="{active: currentDashboard == 'my-interests' }">
+			<a id="my-interests-mobile" href="" ng-click="interestsClick()">My Interests</a>
+		</div>
+	</div>
+	<div ng-show="currentDashboard == 'my-interests'" class="row">
+		<div class="col-xs-12">
+			<div class="mobi-interests">
+				<button ng-click="toggleArrangeClick()"
+						ng-class="{'arrange-toggle': true, 'arrange-toggle-active': toggleActive}">
+					<div class="arrange-icon"></div>
+					<span class="mobi-label" ng-bind="arrangeLabel"></span>
+				</button>
+				<button class="edit-toggle" snap-toggle="right" ng-click="rightDrawerOpen()">
+					<div class="mobi-edit-check"></div>
+					<span class="mobi-label">Edit Interests</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
