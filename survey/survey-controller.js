@@ -7,9 +7,6 @@
  * @parameter  {Object}                $scope                AngularJS scope service.
  * @parameter  {Object}                $rootScope            AngularJS rootScope service.
  * @parameter  {Object}                $timeout              AngularJS timeout service.
- * @parameter  {TileDefinitionFactory} TileDefinitionFactory A [TileDefinitionFactory](#/class/tiledefinitionfactory) instance.
- * @parameter  {UserPrefFactory}       UserPrefFactory       A [UserPrefFactory](#/class/userpreffactory) instance.
- * @parameter  {AnalyticsFactory}      AnalyticsFactory      A [AnalyticsFactory](#/class/analyticsfactory) instance.
  * @parameter  {ScreenSizeFactory}      ScreenSizeFactory      A [ScreenSizeFactory](#/class/screensizefactory) instance.
  */
 angular.module('bcbsnc.med.survey', ['ui.router'])
@@ -49,6 +46,29 @@ angular.module('bcbsnc.med.survey', ['ui.router'])
 			$scope.firstQPage = false;
 			$scope.secondQPage = true;
 		}
+
+		// 2nd Pge
+
+		$scope.answeredYes = false;
+		$scope.answeredNo = false;
+		$scope.answer = '';
+		$scope.checkRadio = function(e) {
+			console.log('event- ', e.target.value);
+			$scope.answer = e.target.value;
+		}
+
+		$scope.submitRadio = function(e) {
+            console.log('event- ', $scope.answer);
+			e.preventDefault();
+			if ($scope.answer === "Yes") {
+				$scope.answeredYes = true;
+			} else if ($scope.answer === "No") {
+				$scope.answeredNo = true;
+			}
+			if ($scope.answers !== "") {
+				$scope.hideSubmitBtn = true;
+			}
+		};
 		
 		$scope.draggable = Modernizr.touch ? "" : "true";
 

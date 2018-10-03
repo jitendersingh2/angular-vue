@@ -49,10 +49,30 @@
     <div class="second-question" ng-if="secondQPage">
         <p>Do you have a regular doctor that you go to for routine checkups?</p><br><br>
         <form>
-            <input type="radio" name="second_Q_1" value="Yes"> Yes<br>
-            <input type="radio" name="second_Q_2" value="No"> No<br><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submit($event)">Submit</button>
+            <input type="radio" name="routineCheckUps" value="Yes" ng-click="checkRadio($event)"> Yes<br>
+            <input type="radio" name="routineCheckUps" value="No" ng-click="checkRadio($event)"> No<br><br>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitRadio($event)">Submit</button>
         </form>
+        <div ng-if="answeredNo">
+            <br><br>
+            <a>Open a new browser tab to find in-network doctors close to you.</a> (You can also find doctors using the Blue Cross NC mobile app.) Once you’ve chosen a regular doctor, add their information to the Quick Reference Guide that you get after this survey.
+            <br><br>
+            <button type="button" class="btn-blue">Continue</button>
+        </div>
+        <div ng-if="answeredYes">
+            <br><br>
+            <b>Excellent!</b>
+            <p>Fill in your doctor’s information here — and we’ll add it to the Quick Reference Guide that you get after this survey.</p>
+            <p>(<a href="">Open a new browser to look it up if needed.</a></p><br>
+            <p>Fields marked with * are required.</p><br>
+            <form>
+                Doctor's Name*       <input type="text"><br>
+                Phone Number*        <input type="text"><br>
+                Office Hours         <input type="text"><br>
+                After-Hours Number   <input type="text"><br><br>
+                <button type="button" class="btn-blue">Submit and continue to next question</button>
+            </form>       
+        </div>
     </div>
 
     
