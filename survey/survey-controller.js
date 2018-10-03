@@ -17,19 +17,40 @@ angular.module('bcbsnc.med.survey', ['ui.router'])
 	//@ngInject
 	function ($scope, $rootScope, $timeout, ScreenSizeFactory) {
 
-        $scope.showAnsweredCorrectly = false;
-        $scope.showAnsweredInCorrectly = false;
-        $scope.answers = [];
+		$scope.firstQPage = true;
+		$scope.secondQPage = false;
+		$scope.showAnsweredCorrectly = false;
+		$scope.showAnsweredInCorrectly = false;
+		$scope.hideSubmitBtn = false;
+		$scope.answers = [];
         $scope.insertAnswers = function(e) {
-            console.log(e.target);
-        };
+			var val = e.target.value;
+			if (e.target.checked) {
+				$scope.answers.push(val);
+			} else {
+				$scope.answers.pop();
+			}
+		};
 
         $scope.submit = function(e) {
-            console.log('event- ', e);
-            e.preventDefault();
-            $scope.showAnsweredInCorrectly = true;
-        };
-        $scope.draggable = Modernizr.touch ? "" : "true";
+            console.log('event- ', $scope.answers);
+			e.preventDefault();
+			if ($scope.answers.length === 3) {
+				$scope.showAnsweredCorrectly = true;
+			} else {
+				$scope.showAnsweredInCorrectly = true;
+			}
+			$scope.hideSubmitBtn = true;
+		};
+		
+		$scope.next = function (e) {
+			e.preventDefault();
+			$scope.hideSubmitBtn = false;
+			$scope.firstQPage = false;
+			$scope.secondQPage = true;
+		}
+		
+		$scope.draggable = Modernizr.touch ? "" : "true";
 
 		/*
 		 * listen for reload event from mobile interests drawer / window-resize
