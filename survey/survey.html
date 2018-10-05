@@ -1,31 +1,44 @@
 <div id="survey-first-ques-container" class="animated fadeIn">
     <p class="header">2019 ER Utilization Rewardable Activity Survey</p>
     <!-- #if ($wo.feature.blueRewards) -->
-    <p>Earn Blue Rewards points and get your own personalized Quick Reference Guide when you test your knowledge about choosing the most appropriate place to get care.</p>
+    <p ng-if="!isMemberHasReward">
+        Earn Blue Rewards points and get your own personalized Quick Reference Guide when you test your knowledge 
+        about choosing the most appropriate place to get care.
+    </p>
     <!-- #else
-        <p> Do you know when it’s best to go to an urgent care center or an emergency department? Test your knowledge about all of your care options and get a personalized Quick Reference Guide.</p>
+        <p>
+             Do you know when it’s best to go to an urgent care center or an emergency department? 
+             Test your knowledge about all of your care options and get a personalized Quick Reference Guide.
+        </p>
     #end -->
     <p class="sub-header" ng-if="firstQPage || secondQPage">Your Doctor</p>
     <p class="sub-header" ng-if="thirdQPage || fourthQPage">Convenience Care & Urgent Care Centers</p>
     <p class="sub-header" ng-if="isMemberHasTeleHealth">Telehealth</p>
     <p class="sub-header" ng-if="isMemberHasHealthLineBlue">Health Line Blue<sup>SM</sup></p>
+    <p class="header finish-header" ng-if="isMemberHasReward">You are almost the finish line...</p>
+    <p ng-if="isMemberHasReward">
+        Just click the button below to submit your survey and create your personalized Quick Reference Guide. 
+        Print it and hang it up so you’ll have a handy reminder of your care options!
+    </p>
     
     <!-- First Question -->
     <div class="first-question" ng-if="firstQPage">
         <div>
-            <span class="sub-header-title">Your regular doctor should be your first point of contact for your health needs.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="">Need help answering?</a>
+            <p class="sub-header-title">
+                Your regular doctor should be your first point of contact for your health needs.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="">Need help answering?</a>
+            </p>
         </div>
         <p>Why is it important to have a regular doctor? (Select all that apply.)</p>
         <form>
-            <input type="checkbox" name="first_Q_1" value="opt1" ng-click="insertFirstAnswers($event)"> Knows your health history<br>
-            <input type="checkbox" name="first_Q_2" value="opt2" ng-click="insertFirstAnswers($event)"> Helps you prevent or manage long-term conditions (like diabetes or asthma)<br>
-            <input type="checkbox" name="first_Q_3" value="opt3" ng-click="insertFirstAnswers($event)"> Provides regular checkups<br><br>
+            <input type="checkbox" name="first_Q_1" value="opt1" ng-click="insertFirstAnswers($event)"><span class="input-label">Knows your health history</span><br>
+            <input type="checkbox" name="first_Q_2" value="opt2" ng-click="insertFirstAnswers($event)"><span class="input-label">Helps you prevent or manage long-term conditions (like diabetes or asthma)<br>
+            <input type="checkbox" name="first_Q_3" value="opt3" ng-click="insertFirstAnswers($event)"><span class="input-label">Provides regular checkups</span><br>
             <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitFirstAnswer($event)">Submit</button>
         </form>
         
         <div class="answered-correctly" ng-if="showAnsweredCorrectly">
-            <br><br>
+            <br>
             <b>You’re right — great job!</b>
             <p>
                 There are many reasons why having a regular doctor is important. They know you and your health history. 
@@ -33,19 +46,19 @@
                 you can stay up-to-date on vaccines, tests and other preventive care. Your primary doctor is your health 
                 care partner!
             </p>
-            <br><br>
+            <br>
             <button type="button" class="btn-blue" ng-click="next2($event)">Continue</button>
         </div>
         
         <div class="answered-incorrectly" ng-if="showAnsweredInCorrectly">
-            <br><br>
+            <br>
             <b>Oops — all of these are correct answers.</b>
             <p>
                 There are many reasons why having a regular doctor is important. They know you and your health history. 
                 They can also help you manage any health issues you may have. And they provide regular checkups so 
                 you can stay up-to-date on vaccines, tests and other preventive care.
             </p>
-            <br><br>
+            <br>
             <button type="button" class="btn-blue" ng-click="next2($event)">Continue to next question</button>
         </div>
 
@@ -55,27 +68,27 @@
     <div class="second-question" ng-if="secondQPage">
         <p>Do you have a regular doctor that you go to for routine checkups?</p><br><br>
         <form>
-            <input type="radio" name="routineCheckUps" value="Yes" ng-click="selectSecondAnswer($event)"> Yes<br>
-            <input type="radio" name="routineCheckUps" value="No" ng-click="selectSecondAnswer($event)"> No<br><br>
+            <input type="radio" name="routineCheckUps" value="Yes" ng-click="selectSecondAnswer($event)"><span class="input-label"> Yes</span><br>
+            <input type="radio" name="routineCheckUps" value="No" ng-click="selectSecondAnswer($event)"><span class="input-label"> No</span><br>
             <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitSecondAnswer($event)">Submit</button>
         </form>
         <div ng-if="secondAnsweredNo">
-            <br><br>
+            <br>
             <a href="https://wwwps.bcbsnc.com/members/secure/doctors/search.htm" target="_blank">Open a new browser tab to find in-network doctors close to you.</a> (You can also find doctors using the Blue Cross NC mobile app.) Once you’ve chosen a regular doctor, add their information to the Quick Reference Guide that you get after this survey.
-            <br><br>
+            <br>
             <button type="button" class="btn-blue" ng-click="next3($event)">Continue</button>
         </div>
         <div ng-if="secondAnsweredYes">
-            <br><br>
+            <br>
             <b>Excellent!</b>
             <p>Fill in your doctor’s information here — and we’ll add it to the Quick Reference Guide that you get after this survey.</p>
             <p>(<a href="https://wwwps.bcbsnc.com/members/secure/doctors/search.htm" target="_blank">Open a new browser to look it up if needed.</a>)</p><br>
             <p>Fields marked with * are required.</p><br>
             <form ng-submit="next3($event)">
-                <span>Doctor's Name*</span><input type="text" ng-model="doctorName" required="true"><br>
-                <span>Phone Number*</span><input type="text" ng-model="doctorPhoneNumber" required="true"><br>
-                <span>Office Hours</span><input type="text" ng-model="officeHours"><br>
-                <span>After-Hours Number</span><input type="text" ng-model="afterHoursNumber"><br><br>
+                <span class="input-text-label">Doctor's Name*</span><input class="doctorName" name="doctorName" type="text" ng-model="doctorName" ng-keyup="onInputChange($event)" required="true"><br>
+                <span class="input-text-label">Phone Number*</span><input class="doctorPhoneNumber" type="text" name="doctorPhoneNumber" ng-model="doctorPhoneNumber" ng-keyup="onInputChange($event)" required="true"><br>
+                <span class="input-text-label">Office Hours</span><input class="officeHours" type="text" name="officeHours" ng-model="officeHours" ng-keyup="onInputChange($event)"><br>
+                <span class="input-text-label">After-Hours Number</span><input class="afterHoursNumber" type="text" name="afterHoursNumber" ng-model="afterHoursNumber" ng-keyup="onInputChange($event)"><br>
                 <button type="submit" class="btn-blue submit-2nd-Q">Submit and continue to next question</button>
             </form>       
         </div>
@@ -89,15 +102,15 @@
         </div>
         <p>Why else would you go to a convenience care or urgent care center? (Select all that apply.)</p>
         <form>
-            <input type="checkbox" name="first_Q_1" value="opt1" ng-click="selectThirdAnswers($event)"> Have a sudden injury and need a walk-in appointment<br>
-            <input type="checkbox" name="first_Q_2" value="opt2" ng-click="selectThirdAnswers($event)"> Need care when your doctor’s office is closed<br>
-            <input type="checkbox" name="first_Q_3" value="opt3" ng-click="selectThirdAnswers($event)"> Need a flu shot<br>
-            <input type="checkbox" name="first_Q_3" value="opt4" ng-click="selectThirdAnswers($event)"> Have a minor health issue, like a sinus infection or the flu<br><br>
+            <input type="checkbox" name="first_Q_1" value="opt1" ng-click="selectThirdAnswers($event)"><span class="input-label">Have a sudden injury and need a walk-in appointment</span><br>
+            <input type="checkbox" name="first_Q_2" value="opt2" ng-click="selectThirdAnswers($event)"><span class="input-label">Need care when your doctor’s office is closed</span><br>
+            <input type="checkbox" name="first_Q_3" value="opt3" ng-click="selectThirdAnswers($event)"><span class="input-label">Need a flu shot</span><br>
+            <input type="checkbox" name="first_Q_3" value="opt4" ng-click="selectThirdAnswers($event)"><span class="input-label">Have a minor health issue, like a sinus infection or the flu</span><br>
             <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitThirdAnswer($event)">Submit</button>
         </form>
         
         <div class="answered-correctly" ng-if="showThirdAnsweredCorrectly || showThirdAnsweredInCorrectly">
-            <br><br>
+            <br>
             <b ng-if="showAnsweredCorrectly">Exactly!</b>
             <b ng-if="showAnsweredInCorrectly">Oops — all of these are correct answers.</b>
             <p>
@@ -107,7 +120,7 @@
                 Some convenience care centers are housed within retail stores, making them a quick and easy spot to 
                 get your yearly flu shot. And they can save you a lot of time and money compared to a trip to the ER.
             </p>
-            <br><br>
+            <br>
             <button type="button" class="btn-blue" ng-click="next4($event)">Continue</button>
         </div>
 
@@ -117,27 +130,27 @@
     <div class="second-question" ng-if="fourthQPage">
         <p>Do you know which urgent care center is closest to your home?</p><br><br>
         <form>
-            <input type="radio" name="careCenter" value="Yes" ng-click="selectFourthAnswer($event)"> Yes<br>
-            <input type="radio" name="careCenter" value="No" ng-click="selectFourthAnswer($event)"> No<br><br>
+            <input type="radio" name="careCenter" value="Yes" ng-click="selectFourthAnswer($event)"><span class="input-label"> Yes</span><br>
+            <input type="radio" name="careCenter" value="No" ng-click="selectFourthAnswer($event)"><span class="input-label"> No</span><br>
             <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitFourthAnswer($event)">Submit</button>
         </form>
         <div ng-if="fourthAnsweredNo">
-            <br><br>
+            <br>
             <a href="https://wwwps.bcbsnc.com/members/secure/doctors/search.htm" target="_blank">Open a new browser tab to find in-network doctors close to you.</a> 
             You can always find urgent care centers wherever you are by using the Blue Cross NC mobile app. Once you’ve chosen an urgent care center, add their information to the Quick Reference Guide that you get after this survey.
-            <br><br>
+            <br>
             <button type="button" class="btn-blue" ng-click="next5($event)">Continue</button>
         </div>
         <div ng-if="fourthAnsweredYes">
-            <br><br>
+            <br>
             <b>Excellent!</b>
             <p>Fill in that urgent care center’s details here — and we’ll add it to the Quick Reference Guide that you get after this survey.</p>
             <p>(<a href="https://wwwps.bcbsnc.com/members/secure/doctors/search.htm" target="_blank">Open a new browser to look it up if needed.</a>)</p><br>
             <p>Fields marked with * are required.</p><br>
             <form ng-submit="next5($event)">
-                <span>Name/Location*</span><input type="text" ng-model="careCenterNameAndLocation" required="true"><br>
-                <span>Phone Number*</span><input type="text" ng-model="careCenterPhoneNumber"><br>
-                <span>Hours</span><input type="text" ng-model="careCenterOpeningHours"><br>
+                <span class="input-text-label">Name/Location*</span><input class="careCenterNameAndLocation" type="text" name="careCenterNameAndLocation" ng-model="careCenterNameAndLocation" ng-keyup="onInputChange($event)" required="true"><br>
+                <span class="input-text-label">Phone Number*</span><input class="careCenterPhoneNumber" type="text" name="careCenterPhoneNumber" ng-model="careCenterPhoneNumber" ng-keyup="onInputChange($event)"><br>
+                <span class="input-text-label">Hours</span><input class="careCenterOpeningHours" type="text" name="careCenterOpeningHours" ng-model="careCenterOpeningHours" ng-keyup="onInputChange($event)"><br>
                 <button type="submit" class="btn-blue submit-2nd-Q">Submit and continue to next question</button>
             </form>       
         </div>
@@ -151,23 +164,23 @@
         </div>
         <p>It’s quick and easy. Which of these health issues could be handled by a telehealth consult? (Select all that apply.)</p>
         <form>
-            <input type="checkbox" name="telehealth" value="Seasonal Allergies" ng-click="selectTeleHealthAnswers($event)"> Seasonal Allergies<br>
-            <input type="checkbox" name="telehealth" value="Rash" ng-click="selectTeleHealthAnswers($event)"> Rash<br>
-            <input type="checkbox" name="telehealth" value="Chest Pain" ng-click="selectTeleHealthAnswers($event)"> Chest Pain<br>
-            <input type="checkbox" name="telehealth" value="Cough" ng-click="selectTeleHealthAnswers($event)"> Cough<br>
-            <input type="checkbox" name="telehealth" value="Headache" ng-click="selectTeleHealthAnswers($event)"> Headache<br><br>
+            <input type="checkbox" name="telehealth" value="Seasonal Allergies" ng-click="selectTeleHealthAnswers($event)"><span class="input-label">Seasonal Allergies</span><br>
+            <input type="checkbox" name="telehealth" value="Rash" ng-click="selectTeleHealthAnswers($event)"><span class="input-label">Rash</span><br>
+            <input type="checkbox" name="telehealth" value="Chest Pain" ng-click="selectTeleHealthAnswers($event)"><span class="input-label">Chest Pain</span><br>
+            <input type="checkbox" name="telehealth" value="Cough" ng-click="selectTeleHealthAnswers($event)"><span class="input-label">Cough</span><br>
+            <input type="checkbox" name="telehealth" value="Headache" ng-click="selectTeleHealthAnswers($event)"><span class="input-label">Headache</span><br>
             <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitTeleHealthAnswers($event)">Submit</button>
         </form>
         
         <div class="answered-correctly" ng-if="showTeleHealthAnsweredCorrectly || showTeleHealthAnsweredInCorrectly">
-            <br><br>
+            <br>
             <b ng-if="showTeleHealthAnsweredCorrectly">You’re right!</b>
             <b ng-if="showTeleHealthAnsweredInCorrectly">Not quite…</b>
             <p>
                 Allergies, rashes, coughs and headaches are all conditions that a telehealth provider can handle. 
                 Remember that if you ever experience chest pain, you should call 911 or go to the nearest emergency room.
             </p>
-            <br><br>
+            <br>
             <button type="button" class="btn-blue" ng-click="next6($event)">Continue</button>
         </div>
     </div>
@@ -180,15 +193,15 @@
         </div>
         <p>Where can you find the phone number for our 24/7 nurse support line? (Select all that apply.)</p>
         <form>
-            <input type="checkbox" name="telehealth" value="Member ID Card" ng-click="selectHealthLineBlueAnswers($event)"> Member ID Card<br>
-            <input type="checkbox" name="telehealth" value="Blue Cross NC mobile app" ng-click="selectHealthLineBlueAnswers($event)"> Blue Cross NC mobile app<br>
-            <input type="checkbox" name="telehealth" value="Blue Connect" ng-click="selectHealthLineBlueAnswers($event)"> Blue Connect<sup>SM</sup><br>
-            <input type="checkbox" name="telehealth" value="Benefit Booklet" ng-click="selectHealthLineBlueAnswers($event)"> Benefit Booklet<br><br>
+            <input type="checkbox" name="telehealth" value="Member ID Card" ng-click="selectHealthLineBlueAnswers($event)"><span class="input-label">Member ID Card</span><br>
+            <input type="checkbox" name="telehealth" value="Blue Cross NC mobile app" ng-click="selectHealthLineBlueAnswers($event)"><span class="input-label">Blue Cross NC mobile app</span><br>
+            <input type="checkbox" name="telehealth" value="Blue Connect" ng-click="selectHealthLineBlueAnswers($event)"><span class="input-label">Blue Connect<sup>SM</sup></span><br>
+            <input type="checkbox" name="telehealth" value="Benefit Booklet" ng-click="selectHealthLineBlueAnswers($event)"><span class="input-label">Benefit Booklet</span><br>
             <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitHealthLineBlueAnswers($event)">Submit</button>
         </form>
         
         <div class="answered-correctly" ng-if="showHealthLineBlueAnsweredCorrectly || showHealthLineBlueAnsweredInCorrectly">
-            <br><br>
+            <br>
             <b ng-if="showHealthLineBlueAnsweredCorrectly">You got it!</b>
             <b ng-if="showHealthLineBlueAnsweredInCorrectly">Oops — all of these are correct answers.</b>
             <p>
@@ -198,10 +211,50 @@
                 And you’ll also see it on the Quick Reference Guide that you get after finishing this survey. 
                 Be sure to save the number in your mobile phone so it’s handy in the future!
             </p>
-            <br><br>
+            <br>
             <button type="button" class="btn-blue" ng-click="next7($event)">Continue</button>
         </div>
 
     </div>
+
+    <!-- Rewards -->
+    <div class="second-question" ng-if="isMemberHasReward">
+        
+        <p class="header finish-header">Your Doctor</p>
+        <p>Here is the doctor information you provided. Feel free to edit, if needed prior to the reference guide being printed as the next step.</p>
+        <br>
+        <form >
+            <span class="input-text-label">Doctor's Name*</span><input class="doctorName" name="doctorName" type="text" ng-model="doctorName" ng-keyup="onInputChange($event)" required="true"><br>
+            <span class="input-text-label">Phone Number*</span><input class="doctorPhoneNumber" type="text" name="doctorPhoneNumber" ng-model="doctorPhoneNumber" ng-keyup="onInputChange($event)" required="true"><br>
+            <span class="input-text-label">Office Hours</span><input class="officeHours" type="text" name="officeHours" ng-model="officeHours" ng-keyup="onInputChange($event)"><br>
+            <span class="input-text-label">After-Hours Number</span><input class="afterHoursNumber" type="text" name="afterHoursNumber" ng-model="afterHoursNumber" ng-keyup="onInputChange($event)"><br>
+        </form> 
+        
+        <p class="header finish-header">Convenience Care & Urgent Care Centers</p>
+        <p>Here is the convenience/urgent care center you provided. Feel free to edit, if needed prior to the reference guide being printed as the next step.</p>
+        <br>
+        <form>
+            <span class="input-text-label">Name/Location*</span><input class="careCenterNameAndLocation" type="text" name="careCenterNameAndLocation" ng-model="careCenterNameAndLocation" ng-keyup="onInputChange($event)" required="true"><br>
+            <span class="input-text-label">Phone Number*</span><input class="careCenterPhoneNumber" type="text" name="careCenterPhoneNumber" ng-model="careCenterPhoneNumber" ng-keyup="onInputChange($event)"><br>
+            <span class="input-text-label">Hours</span><input class="careCenterOpeningHours" type="text" name="careCenterOpeningHours" ng-model="careCenterOpeningHours" ng-keyup="onInputChange($event)"><br>
+        </form>
+        <br>
+        <!-- If reward -->
+        <button type="button" class="btn-blue submit-2nd-Q" ng-click="printCustomizedGuide()">Create My Guide and Earn Reward</button>
+        <!-- If no reward -->
+        <!-- <button type="button" class="btn-blue submit-2nd-Q" ng-click="printCustomizedGuide()">Create My Quick Reference Guide</button> -->
+
+        <div class="survey-confirm-msg" ng-if="surveyConfirmation">
+            Thank you. You have completed the survey. 
+            We’ll notify you when your Blue Reward points are processed. (Please allow two to four weeks for processing.)
+        </div>
+    </div>
+
+    <!-- <embed
+        type="application/pdf"
+        src="https://github.com/jitendersingh2/angular-vue/blob/master/sample.pdf"
+        id="pdfDocument"
+        width="100%"
+        height="100%" /> -->
     
 </div>

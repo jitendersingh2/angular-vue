@@ -21,6 +21,7 @@ angular.module('bcbsnc.med.survey', ['ui.router'])
 		$scope.isMemberHasTeleHealth = false;
 		$scope.isMemberHasHealthLineBlue = false;
 		$scope.isMemberHasReward = false;
+		$scope.surveyConfirmation = false;
 		$scope.hideSubmitBtn = false;
 		
 		/*
@@ -230,12 +231,36 @@ angular.module('bcbsnc.med.survey', ['ui.router'])
 		};
 		
 		$scope.next7 = function (e) {
+			console.log($scope);
 			e.preventDefault();
 			$scope.hideSubmitBtn = false;
 			$scope.isMemberHasHealthLineBlue = false;
 			$scope.isMemberHasReward = true;
 		}
 
+		/*
+		 * Rewards
+		 */
+
+		$scope.onInputChange = function(e) {
+			console.log(e);
+			$scope[e.target.name] = e.target.value
+		}
+
+		$scope.printCustomizedGuide = function() {
+			console.log('printing');
+			$scope.surveyConfirmation = true;
+			window.print();
+			// var documentId = 'pdfDocument';
+			// var doc = document.getElementById(documentId);
+
+			// //Wait until pdf is ready to print    
+			// if (typeof doc.print === 'undefined') {    
+			// 	setTimeout(function(){printCustomizedGuide(documentId);}, 1000);
+			// } else {
+			// 	doc.print();
+			// }
+		}
 
 		
 		$scope.draggable = Modernizr.touch ? "" : "true";
