@@ -2,6 +2,11 @@
     padding: 20px;
     background-color: white;
     font-size: 12px;
+    img {
+        height: 30px;
+        width: 30px;
+        vertical-align: text-top;
+    }
     .header {
         font-size: 20px;
         font-weight: bold;
@@ -14,8 +19,19 @@
         margin-top: 20px;
         margin-bottom: 10px;
     }
+    .finish-info {
+        vertical-align: -webkit-baseline-middle;
+    }
     .sub-header-title {
-        margin-right: 130px;
+        display: inline-flex;
+        margin-bottom: 20px;
+        // margin-right: 130px;
+        span {
+            font-size: 13px;
+        }
+        .content {
+            margin-right: 100px 
+        }
     }
     .input-label {
         vertical-align: text-bottom;
@@ -71,5 +87,10 @@
     .survey-confirm-msg {
         font-size: 16px;
         margin-top: 30px;
+    }
+    #pdfDocument {
+        visibility: hidden;
+        width: 0px;
+        height: 0px;
     }
 }
