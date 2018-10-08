@@ -38,7 +38,7 @@
             <input type="checkbox" name="first_Q_1" value="opt1" ng-click="insertFirstAnswers($event)"><span class="input-label">Knows your health history</span><br>
             <input type="checkbox" name="first_Q_2" value="opt2" ng-click="insertFirstAnswers($event)"><span class="input-label">Helps you prevent or manage long-term conditions (like diabetes or asthma)<br>
             <input type="checkbox" name="first_Q_3" value="opt3" ng-click="insertFirstAnswers($event)"><span class="input-label">Provides regular checkups</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitFirstAnswer($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitFirstAnswer($event)">Next</button>
         </form>
         
         <div class="answered-correctly" ng-if="showAnsweredCorrectly">
@@ -74,7 +74,7 @@
         <form>
             <input type="radio" name="routineCheckUps" value="Yes" ng-click="selectSecondAnswer($event)"><span class="input-label"> Yes</span><br>
             <input type="radio" name="routineCheckUps" value="No" ng-click="selectSecondAnswer($event)"><span class="input-label"> No</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitSecondAnswer($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitSecondAnswer($event)">Next</button>
         </form>
         <div ng-if="secondAnsweredNo">
             <br>
@@ -113,7 +113,7 @@
             <input type="checkbox" name="first_Q_2" value="opt2" ng-click="selectThirdAnswers($event)"><span class="input-label">Need care when your doctor’s office is closed</span><br>
             <input type="checkbox" name="first_Q_3" value="opt3" ng-click="selectThirdAnswers($event)"><span class="input-label">Need a flu shot</span><br>
             <input type="checkbox" name="first_Q_3" value="opt4" ng-click="selectThirdAnswers($event)"><span class="input-label">Have a minor health issue, like a sinus infection or the flu</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitThirdAnswer($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitThirdAnswer($event)">Next</button>
         </form>
         
         <div class="answered-correctly" ng-if="showThirdAnsweredCorrectly || showThirdAnsweredInCorrectly">
@@ -139,7 +139,7 @@
         <form>
             <input type="radio" name="careCenter" value="Yes" ng-click="selectFourthAnswer($event)"><span class="input-label"> Yes</span><br>
             <input type="radio" name="careCenter" value="No" ng-click="selectFourthAnswer($event)"><span class="input-label"> No</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitFourthAnswer($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitFourthAnswer($event)">Next</button>
         </form>
         <div ng-if="fourthAnsweredNo">
             <br>
@@ -181,7 +181,7 @@
             <input type="checkbox" name="telehealth" value="Chest Pain" ng-click="selectTeleHealthAnswers($event)"><span class="input-label">Chest Pain</span><br>
             <input type="checkbox" name="telehealth" value="Cough" ng-click="selectTeleHealthAnswers($event)"><span class="input-label">Cough</span><br>
             <input type="checkbox" name="telehealth" value="Headache" ng-click="selectTeleHealthAnswers($event)"><span class="input-label">Headache</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitTeleHealthAnswers($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitTeleHealthAnswers($event)">Next</button>
         </form>
         
         <div class="answered-correctly" ng-if="showTeleHealthAnsweredCorrectly || showTeleHealthAnsweredInCorrectly">
@@ -214,7 +214,7 @@
             <input type="checkbox" name="telehealth" value="Blue Cross NC mobile app" ng-click="selectHealthLineBlueAnswers($event)"><span class="input-label">Blue Cross NC mobile app</span><br>
             <input type="checkbox" name="telehealth" value="Blue Connect" ng-click="selectHealthLineBlueAnswers($event)"><span class="input-label">Blue Connect<sup>SM</sup></span><br>
             <input type="checkbox" name="telehealth" value="Benefit Booklet" ng-click="selectHealthLineBlueAnswers($event)"><span class="input-label">Benefit Booklet</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitHealthLineBlueAnswers($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitHealthLineBlueAnswers($event)">Next</button>
         </form>
         
         <div class="answered-correctly" ng-if="showHealthLineBlueAnsweredCorrectly || showHealthLineBlueAnsweredInCorrectly">
