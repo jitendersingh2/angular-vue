@@ -244,19 +244,39 @@ angular.module('bcbsnc.med.survey', ['ui.router'])
 		/*
 		 * Rewards
 		 */
-		$scope.onInputChange = function(e) {
-			$scope[e.target.name] = e.target.value;
+		$scope.surveyData = {
+			// Doctor Info
+			doctorName: $scope.doctorName,
+			doctorPhoneNumber: $scope.doctorPhoneNumber,
+			officeHours: $scope.officeHours,
+			afterHoursNumber: $scope.afterHoursNumber,
+			// Care Center Info
+			careCenterNameAndLocation: $scope.careCenterNameAndLocation,
+			careCenterPhoneNumber: $scope.careCenterPhoneNumber,
+			careCenterOpeningHours: $scope.careCenterOpeningHours
 		}
 
 		$scope.printCustomizedGuide = function() {
-			console.log('printing');
+			console.log('printing- ', $scope.surveyData);
 			$scope.surveyConfirmation = true;
 			
 			var documentId = 'pdfDocument';
+			var printedContentId = 'printedCustimizedGuide';
 			var doc = document.getElementById(documentId);
+			var printedContent = document.getElementById(printedContentId).innerHTML;
 			console.log('doc- ', doc);
+			doc.contentWindow.document.body.innerHTML = printedContent;
+			
+			// doc.srcdoc = printedContent;
 			doc.contentWindow.focus()
 			doc.contentWindow.print();
+		}
+
+		/*
+		 * Common
+		 */
+		$scope.onInputChange = function(e) {
+			$scope[e.target.name] = e.target.value;
 		}
 	}
 );

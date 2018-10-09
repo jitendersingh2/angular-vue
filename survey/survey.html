@@ -38,7 +38,7 @@
             <input type="checkbox" name="first_Q_1" value="opt1" ng-click="insertFirstAnswers($event)"><span class="input-label">Knows your health history</span><br>
             <input type="checkbox" name="first_Q_2" value="opt2" ng-click="insertFirstAnswers($event)"><span class="input-label">Helps you prevent or manage long-term conditions (like diabetes or asthma)<br>
             <input type="checkbox" name="first_Q_3" value="opt3" ng-click="insertFirstAnswers($event)"><span class="input-label">Provides regular checkups</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitFirstAnswer($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitFirstAnswer($event)">Next</button>
         </form>
         
         <div class="answered-correctly" ng-if="showAnsweredCorrectly">
@@ -74,11 +74,16 @@
         <form>
             <input type="radio" name="routineCheckUps" value="Yes" ng-click="selectSecondAnswer($event)"><span class="input-label"> Yes</span><br>
             <input type="radio" name="routineCheckUps" value="No" ng-click="selectSecondAnswer($event)"><span class="input-label"> No</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitSecondAnswer($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitSecondAnswer($event)">Next</button>
         </form>
         <div ng-if="secondAnsweredNo">
             <br>
-            <a href="https://wwwps.bcbsnc.com/members/secure/doctors/search.htm" target="_blank">Open a new browser tab to find in-network doctors close to you.</a> (You can also find doctors using the Blue Cross NC mobile app.) Once you’ve chosen a regular doctor, add their information to the Quick Reference Guide that you get after this survey.
+            <p>
+                <a href="https://wwwps.bcbsnc.com/members/secure/doctors/search.htm" target="_blank">
+                    Open a new browser tab to find in-network doctors close to you.
+                </a> 
+                (You can also find doctors using the Blue Cross NC mobile app.) Once you’ve chosen a regular doctor, add their information to the Quick Reference Guide that you get after this survey.
+            </p>
             <br>
             <button type="button" class="btn-blue" ng-click="next3($event)">Continue</button>
         </div>
@@ -113,7 +118,7 @@
             <input type="checkbox" name="first_Q_2" value="opt2" ng-click="selectThirdAnswers($event)"><span class="input-label">Need care when your doctor’s office is closed</span><br>
             <input type="checkbox" name="first_Q_3" value="opt3" ng-click="selectThirdAnswers($event)"><span class="input-label">Need a flu shot</span><br>
             <input type="checkbox" name="first_Q_3" value="opt4" ng-click="selectThirdAnswers($event)"><span class="input-label">Have a minor health issue, like a sinus infection or the flu</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitThirdAnswer($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitThirdAnswer($event)">Next</button>
         </form>
         
         <div class="answered-correctly" ng-if="showThirdAnsweredCorrectly || showThirdAnsweredInCorrectly">
@@ -139,12 +144,16 @@
         <form>
             <input type="radio" name="careCenter" value="Yes" ng-click="selectFourthAnswer($event)"><span class="input-label"> Yes</span><br>
             <input type="radio" name="careCenter" value="No" ng-click="selectFourthAnswer($event)"><span class="input-label"> No</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitFourthAnswer($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitFourthAnswer($event)">Next</button>
         </form>
         <div ng-if="fourthAnsweredNo">
             <br>
-            <a href="https://wwwps.bcbsnc.com/members/secure/doctors/search.htm" target="_blank">Open a new browser tab to find in-network doctors close to you.</a> 
-            You can always find urgent care centers wherever you are by using the Blue Cross NC mobile app. Once you’ve chosen an urgent care center, add their information to the Quick Reference Guide that you get after this survey.
+            <p>
+                <a href="https://wwwps.bcbsnc.com/members/secure/doctors/search.htm" target="_blank">
+                    Open a new browser tab to find in-network doctors close to you.
+                </a> 
+                You can always find urgent care centers wherever you are by using the Blue Cross NC mobile app. Once you’ve chosen an urgent care center, add their information to the Quick Reference Guide that you get after this survey.
+            </p>
             <br>
             <button type="button" class="btn-blue" ng-click="next5($event)">Continue</button>
         </div>
@@ -181,7 +190,7 @@
             <input type="checkbox" name="telehealth" value="Chest Pain" ng-click="selectTeleHealthAnswers($event)"><span class="input-label">Chest Pain</span><br>
             <input type="checkbox" name="telehealth" value="Cough" ng-click="selectTeleHealthAnswers($event)"><span class="input-label">Cough</span><br>
             <input type="checkbox" name="telehealth" value="Headache" ng-click="selectTeleHealthAnswers($event)"><span class="input-label">Headache</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitTeleHealthAnswers($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitTeleHealthAnswers($event)">Next</button>
         </form>
         
         <div class="answered-correctly" ng-if="showTeleHealthAnsweredCorrectly || showTeleHealthAnsweredInCorrectly">
@@ -214,7 +223,7 @@
             <input type="checkbox" name="telehealth" value="Blue Cross NC mobile app" ng-click="selectHealthLineBlueAnswers($event)"><span class="input-label">Blue Cross NC mobile app</span><br>
             <input type="checkbox" name="telehealth" value="Blue Connect" ng-click="selectHealthLineBlueAnswers($event)"><span class="input-label">Blue Connect<sup>SM</sup></span><br>
             <input type="checkbox" name="telehealth" value="Benefit Booklet" ng-click="selectHealthLineBlueAnswers($event)"><span class="input-label">Benefit Booklet</span><br>
-            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitHealthLineBlueAnswers($event)">Submit</button>
+            <button type="button" class="btn-blue" ng-if="!hideSubmitBtn" ng-click="submitHealthLineBlueAnswers($event)">Next</button>
         </form>
         
         <div class="answered-correctly" ng-if="showHealthLineBlueAnsweredCorrectly || showHealthLineBlueAnsweredInCorrectly">
@@ -278,10 +287,70 @@
     </div>
     <!-- Print PDF Content  -->
     <iframe
-        type="application/pdf"
-        src="/assets/members/public/dashboard/images/Survey.pdf"
         id="pdfDocument"
         width="100%"
         height="100%" />
+
+    <div id="printedCustimizedGuide" style="display: none;">
+        <div class="first-header" style="display: inline-flex;">
+            <div class="header-title-0" style="font-size: 24px;color: lightseagreen;font-weight: 600;">Quick Reference Guide</div>
+            <img 
+                src="/assets/members/public/dashboard/images/logo-bcbsnc-blueconnect.png" 
+                srcset="/assets/members/public/dashboard/images/logo-bcbsnc-blueconnect@2x.png" 
+                style="width: 300px;background: lightslategrey;margin-left: 450px;"
+                alt="BlueConnect">
+        </div>
+        <div class="header-title-1" style="font-size: 30px;color: darkgoldenrod;">KNOW WHERE TO GO</div>
+        <div class="header-title-2" style="color: deepskyblue;font-size: 28px;">The right place-for the right care-at the right time</div>
+        <br>
+        
+        <div style="padding: 10px;width: 600px;border: 1px solid whitesmoke;">
+            <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">HEALTH LINE BLUE<sup>SM</sup></div>
+            <div style="font-size: 14px;">
+                YOUR GO-TO EXPERTS. Get answers to your health question fast, freaa and 24/7. A nurse can help you get relief and treat
+                symptoms at home, or direct you to the care you need. Save this number in phone for easy access! 
+            </div><br>
+            <h3 style="font-weight: 600;">1-877-477-2424 (toll-free)</h3>
+            <h3 style="font-weight: 600;">24 hours a day, 7 days a week</h3>
+        </div>
+        <br>
+        
+        <div style="padding: 10px;width: 600px;border: 1px solid whitesmoke;">
+            <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">MY DOCTOR</div>
+            <div style="font-size: 14px;">
+                YOUR HEALTH CARE PARTNER. A primary doctor knows your health history-often resulting in better care over time
+                and better prevention of health problems in the future. You will generally save money, time and hassle as well. 
+            </div><br>
+            <p>
+                <span class="input-text-label">Name: </span> <span style="border-bottom: 1px solid">{{ doctorName }}</span>
+            </p>
+            <p>
+                <span class="input-text-label">Phone: </span> <span style="border-bottom: 1px solid">{{ doctorPhoneNumber }}</span>
+            </p>
+            <p>
+                <span class="input-text-label">Hours: </span> <span style="border-bottom: 1px solid">{{ officeHours }}</span>
+            </p>
+            <p>
+                <span class="input-text-label">After-Hours #: </span> <span style="border-bottom: 1px solid">{{ afterHoursNumber }}</span>
+            </p>
+        </div>
+        <br>
+        <div style="padding: 10px;width: 600px;border: 1px solid whitesmoke;">
+            <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">URGENT CARE</div>
+            <div style="font-size: 14px;">
+                YOUR BACK UP OPTION. Urgent care center can be a time and money-saver when you have non-life-threatening illnesses or
+                injuries-but you are not able to visit your doctor. Ideal for walk-ins, after-hours and weekends. 
+            </div><br>
+            <p>
+                <span class="input-text-label">Location: </span> <span style="border-bottom: 1px solid">{{ careCenterNameAndLocation }}</span>
+            </p>
+            <p>
+                <span class="input-text-label">Phone: </span> <span style="border-bottom: 1px solid">{{ careCenterPhoneNumber }}</span>
+            </p>
+            <p>
+                <span class="input-text-label">Hours: </span> <span style="border-bottom: 1px solid">{{ careCenterOpeningHours }}</span>
+            </p>
+        </div>
+    </div>
     
 </div>
