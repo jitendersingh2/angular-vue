@@ -291,65 +291,130 @@
         width="100%"
         height="100%" />
 
-    <div id="printedCustimizedGuide" style="display: none;">
+    <div id="printedCustimizedGuide" style="display: none;font-family: Arial, Helvetica, sans-serif;">
+    <!-- <div id="printedCustimizedGuide" style="font-family: Arial, Helvetica, sans-serif;"> -->
         <div class="first-header" style="display: inline-flex;">
-            <div class="header-title-0" style="font-size: 24px;color: lightseagreen;font-weight: 600;">Quick Reference Guide</div>
+            <div class="header-title-0" style="font-size: 22px;color: lightseagreen;font-weight: 600;">Quick Reference Guide</div>
             <img 
-                src="/assets/members/public/dashboard/images/logo-bcbsnc-blueconnect.png" 
-                srcset="/assets/members/public/dashboard/images/logo-bcbsnc-blueconnect@2x.png" 
-                style="width: 300px;background: lightslategrey;margin-left: 450px;"
+                src="/assets/members/public/dashboard/images/bcbsnc-logo.png" 
+                style="width: 300px;margin-left: 150px;"
                 alt="BlueConnect">
         </div>
-        <div class="header-title-1" style="font-size: 30px;color: darkgoldenrod;">KNOW WHERE TO GO</div>
-        <div class="header-title-2" style="color: deepskyblue;font-size: 28px;">The right place-for the right care-at the right time</div>
-        <br>
+        <div class="header-title-1" style="font-size: 28px;color: darkgoldenrod;">KNOW WHERE TO GO</div>
+        <div class="header-title-2" style="color: deepskyblue;font-size: 24px;margin-bottom: 10px;">The right place-for the right care-at the right time</div>
         
-        <div style="padding: 10px;width: 600px;border: 1px solid whitesmoke;">
-            <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">HEALTH LINE BLUE<sup>SM</sup></div>
-            <div style="font-size: 14px;">
-                YOUR GO-TO EXPERTS. Get answers to your health question fast, freaa and 24/7. A nurse can help you get relief and treat
-                symptoms at home, or direct you to the care you need. Save this number in phone for easy access! 
-            </div><br>
-            <h3 style="font-weight: 600;">1-877-477-2424 (toll-free)</h3>
-            <h3 style="font-weight: 600;">24 hours a day, 7 days a week</h3>
+        <div style="display: inline-flex;background-color: aliceblue;margin-bottom: 5px;">
+            <div style="background-color: white;padding: 5px;width: 50%;border: 1px solid whitesmoke;margin: 5px;">
+                <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">HEALTH LINE BLUE<sup>SM</sup></div>
+                <div style="font-size: 14px;">
+                    YOUR GO-TO EXPERTS. Get answers to your health question fast, freaa and 24/7. A nurse can help you get relief and treat
+                    symptoms at home, or direct you to the care you need. Save this number in phone for easy access! 
+                </div>
+                <h3 style="font-weight: 600;">1-877-477-2424 (toll-free)</h3>
+                <h3 style="font-weight: 600;margin-bottom: -5px;">24 hours a day, 7 days a week</h3>
+            </div>
+            <div style="padding: 5px;width: 50%">
+                <div style="font-size: 16px;color: darkblue;font-weight: 700;margin-bottom: 10px;">
+                    A great call when you think you need care right away.
+                </div>
+                <div style="font-size: 14px;border-bottom: 1px solid skyblue;margin-bottom: 10px;">
+                    CALL IF YOU: 
+                </div>
+                <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Aren't you sure where to go</p>
+                <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Want to treat your illness or injury at home</p>
+                <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Have health questions</p>
+            </div>
         </div>
-        <br>
         
-        <div style="padding: 10px;width: 600px;border: 1px solid whitesmoke;">
-            <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">MY DOCTOR</div>
-            <div style="font-size: 14px;">
-                YOUR HEALTH CARE PARTNER. A primary doctor knows your health history-often resulting in better care over time
-                and better prevention of health problems in the future. You will generally save money, time and hassle as well. 
-            </div><br>
-            <p>
-                <span class="input-text-label">Name: </span> <span style="border-bottom: 1px solid">{{ doctorName }}</span>
-            </p>
-            <p>
-                <span class="input-text-label">Phone: </span> <span style="border-bottom: 1px solid">{{ doctorPhoneNumber }}</span>
-            </p>
-            <p>
-                <span class="input-text-label">Hours: </span> <span style="border-bottom: 1px solid">{{ officeHours }}</span>
-            </p>
-            <p>
-                <span class="input-text-label">After-Hours #: </span> <span style="border-bottom: 1px solid">{{ afterHoursNumber }}</span>
-            </p>
+        <div style="display: inline-flex;background-color: aliceblue;margin-bottom: 5px;">
+            <div style="background-color: white;padding: 5px;width: 50%;border: 1px solid whitesmoke;margin: 5px;">
+                <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">MY DOCTOR</div>
+                <div style="font-size: 14px;">
+                    YOUR HEALTH CARE PARTNER. A primary doctor knows your health history-often resulting in better care over time
+                    and better prevention of health problems in the future. You will generally save money, time and hassle as well. 
+                </div>
+                <p>
+                    <span class="input-text-label">Name: </span> <span style="display: inline-block;width: 85%;border-bottom: 1px solid darkgrey;">{{ doctorName }}</span>
+                </p>
+                <p>
+                    <span class="input-text-label">Phone: </span> <span style="display: inline-block;width: 85%;border-bottom: 1px solid darkgrey;">{{ doctorPhoneNumber }}</span>
+                </p>
+                <p>
+                    <span class="input-text-label">Hours: </span> <span style="display: inline-block;width: 85%;border-bottom: 1px solid darkgrey;">{{ officeHours }}</span>
+                </p>
+                <p style="margin-bottom: -5px;">
+                    <span class="input-text-label">After-Hours #: </span> <span style="display: inline-block;width: 69%;border-bottom: 1px solid darkgrey;">{{ afterHoursNumber }}</span>
+                </p>
+            </div>
+            <div style="padding: 5px;width: 50%">
+                <div style="font-size: 16px;color: darkblue;font-weight: 700;margin-bottom: 10px;">
+                    If it's not a life threatening emergency, your primary doctor is usually the best option.
+                </div>
+                <div style="font-size: 14px;border-bottom: 1px solid skyblue;margin-bottom: 10px;">
+                    CALL IF YOU: 
+                </div>
+                <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Have an illness, injury, pain or health issue</p>
+                <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Need a prescription or refill</p>
+                <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Have a long term condition like high blood pressure, diabetes or asthma</p>
+                <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Want to prevent problems (preventing care, like checkups or vaccines)</p>
+            </div>
         </div>
-        <br>
-        <div style="padding: 10px;width: 600px;border: 1px solid whitesmoke;">
-            <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">URGENT CARE</div>
-            <div style="font-size: 14px;">
-                YOUR BACK UP OPTION. Urgent care center can be a time and money-saver when you have non-life-threatening illnesses or
-                injuries-but you are not able to visit your doctor. Ideal for walk-ins, after-hours and weekends. 
-            </div><br>
-            <p>
-                <span class="input-text-label">Location: </span> <span style="border-bottom: 1px solid">{{ careCenterNameAndLocation }}</span>
-            </p>
-            <p>
-                <span class="input-text-label">Phone: </span> <span style="border-bottom: 1px solid">{{ careCenterPhoneNumber }}</span>
-            </p>
-            <p>
-                <span class="input-text-label">Hours: </span> <span style="border-bottom: 1px solid">{{ careCenterOpeningHours }}</span>
-            </p>
+        
+        <div style="display: inline-flex;background-color: aliceblue;margin-bottom: 5px;">
+            <div style="background-color: white;padding: 5px;width: 50%;border: 1px solid whitesmoke;margin: 5px;">
+                <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">URGENT CARE</div>
+                <div style="font-size: 14px;">
+                    YOUR BACK UP OPTION. Urgent care center can be a time and money-saver when you have non-life-threatening illnesses or
+                    injuries-but you are not able to visit your doctor. Ideal for walk-ins, after-hours and weekends. 
+                </div><br>
+                <p>
+                    <span class="input-text-label">Location: </span> <span style="display: inline-block;width: 80%;border-bottom: 1px solid darkgrey;">{{ careCenterNameAndLocation }}</span>
+                </p>
+                <p>
+                    <span class="input-text-label">Phone: </span> <span style="display: inline-block;width: 85%;border-bottom: 1px solid darkgrey;">{{ careCenterPhoneNumber }}</span>
+                </p>
+                <p style="margin-bottom: -5px;">
+                    <span class="input-text-label">Hours: </span> <span style="display: inline-block;width: 85%;border-bottom: 1px solid darkgrey;">{{ careCenterOpeningHours }}</span>
+                </p>
+            </div>
+            <div style="padding: 5px;width: 50%">
+                <div style="font-size: 16px;color: darkblue;font-weight: 700;margin-bottom: 10px;">
+                    If your doctor care can't see you today or the office is closed, urgent care is an option for issues that can't wait.
+                </div>
+                <div style="font-size: 14px;border-bottom: 1px solid skyblue;margin-bottom: 10px;">
+                    CALL IF YOU: 
+                </div>
+                <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Can't wait until your doctor is available to treat you</p>
+                <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Have a sudden injury and need a walk-in appointment</p>
+                <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Need care after-hours or on weekends and your doctor is closed</p>
+            </div>
+        </div>
+
+        <div style="background-color: white;margin-bottom: 0px;">
+            <div style="display: inline-flex;width: 100%;margin: 10px;">
+                <div style="font-size: 16px;">
+                    Remember: If you have an issue that threatens your life or health, never wait.
+                    Call 911 or go straight to the emergency room. 
+                </div>
+                <div style="font-size: 18px;">
+                    Learn more about your opinions at <i style="color: skyblue;font-weight: 700;">bcbsnc.com/CareOptions</i> 
+                </div>
+            </div>
+            <div>
+                <b>This is not a medical advice. Consult a medical professional and seek assistance in an emergency.</b>
+            </div>
+            <div>
+                <p style="font-size: 9px; color: lightgray;">
+                    Blue Cross and Blue Shield of North Carolina (Blue Cross NC) provides the Health Line Blue program for your convenience and is not liable in any way for the goods or services received. Blue Cross NC reserves the right to discontinue or change the program at any time.
+                    Decisions regarding your care should be made with the advice of your doctor.
+                </p>
+            </div>
+            <div>
+                <p style="font-size: 9px; color: lightgray;">
+                    BLUE CROSS®, BLUE SHIELD®, the Cross and Shield symbols, and service marks are marks of the Blue Cross and Blue Shield Association, an association of independent Blue Cross and Blue Shield Plans. Blue Cross NC is an independent licensee of the Blue
+                    Cross and Blue Shield Association. U12242b, 6/17
+                </p>
+            </div>
         </div>
     </div>
     
