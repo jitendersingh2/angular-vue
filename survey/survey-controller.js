@@ -6,14 +6,13 @@
  * @constructor
  * @parameter  {Object}                $scope                AngularJS scope service.
  * @parameter  {Object}                $rootScope            AngularJS rootScope service.
+ * @parameter {Object}                 $http                 AngularJS http service.
  */
 angular.module('bcbsnc.med.survey', ['ui.router'])
-	.controller('SurveyCtrl',
-	//@ngInject
-	function ($scope, $rootScope) {
+	.controller('SurveyCtrl', function ($scope, $rootScope, $http) {
 
-		$scope.isMemberHasTeleHealth = bcbsnc.dashboard.features.telehealth;
-		$scope.isMemberHasHealthLineBlue = bcbsnc.dashboard.features.healthLineBlue;
+		$scope.isMemberHasTeleHealth = true; //bcbsnc.dashboard.features.telehealth;
+		$scope.isMemberHasHealthLineBlue = true; //bcbsnc.dashboard.features.healthLineBlue;
 		$scope.isMemberRewardble = bcbsnc.thisMember.blueRewards.available;
 		
 		$scope.firstQPage = true;
@@ -244,20 +243,91 @@ angular.module('bcbsnc.med.survey', ['ui.router'])
 		/*
 		 * Rewards
 		 */
-		$scope.surveyData = {
-			// Doctor Info
-			doctorName: $scope.doctorName,
-			doctorPhoneNumber: $scope.doctorPhoneNumber,
-			officeHours: $scope.officeHours,
-			afterHoursNumber: $scope.afterHoursNumber,
-			// Care Center Info
-			careCenterNameAndLocation: $scope.careCenterNameAndLocation,
-			careCenterPhoneNumber: $scope.careCenterPhoneNumber,
-			careCenterOpeningHours: $scope.careCenterOpeningHours
-		}
-
+		
 		$scope.printCustomizedGuide = function() {
-			console.log('printing- ', $scope.surveyData);
+			var currDate = moment().format('YYYY-MM-DDTHH:mm:ssZ');
+			var surveyData = [{
+				"eventEndTimestamp":currDate,
+				"eventStartTimestamp":currDate,
+				"sourceSystemCode":"ERU",
+				"touchpointTransactionContextCode":"ERSrvyCmpl",
+				"transactionSuccessIndicator":"Y",
+				"partyIdentification":[
+					{
+					   "identityName":"externalMemberId",
+					   "identityValue":bcbsnc.thisMember.loggedInMember.key
+					},
+					{
+					   "identityName":"personId",
+					   "identityValue":"13494237"
+					},
+					{
+					   "identityName":"userId",
+					   "identityValue":bcbsnc.thisMember.loggedInMember.userID
+					},
+					{
+					   "identityName":"ruid",
+					   "identityValue":bcbsnc.dashboard.RUID
+					}
+				 ],
+				 "extensionDataElement":[
+					{
+					   "identityName":"ImportanceofRegularDoctor",
+					   "identityValue":$scope.firstAnswers
+					},
+					{
+					   "identityName":"haveRegulardoctorForRoutineCheckups",
+					   "identityValue":$scope.secondAnswer
+					},
+					{
+					   "identityName":"haveRegulardoctorForRoutineCheckupYES",
+					   "identityValue":[
+						  {
+							 "DoctorName":$scope.doctorName,
+							 "PhoneNumber":$scope.doctorPhoneNumber,
+							 "OfficeHours":$scope.officeHours,
+							 "AfterOurHours":$scope.afterHoursNumber
+						  }
+					   ]
+					},
+					{
+					   "identityName":"whyGoToConvenienceCareOrUrgentCareCenter",
+					   "identityValue":$scope.thirdAnswers
+					},
+					{
+					   "identityName":"whichUrgentcareCenterClosestToYourHome",
+					   "identityValue":$scope.fourthAnswer
+					},
+					{
+					   "identityName":"whichUrgentcareCenterClosestToYourHomeYes",
+					   "identityValue":[
+						  {
+							 "NameLocation":$scope.careCenterNameAndLocation,
+							 "PhoneNumber":$scope.careCenterPhoneNumber,
+							 "Hours":$scope.careCenterOpeningHours
+						  }
+					   ]
+					},
+					{
+					   "identityName":"healthIssuesHandledByTelehealthConsultant",
+					   "identityValue":$scope.teleHealthAnswers
+					},
+					{
+					   "identityName":"phoneNumberForOurNurseSupportLine",
+					   "identityValue":$scope.healthLineBlueAnswers
+					}
+				 ]
+			}]
+			console.log('printing- ', surveyData);
+
+			$http.post('https://jsonplaceholder.typicode.com/posts', surveyData)
+				.success(function(res) {
+					console.log('response- ', res);
+				})
+				.error(function(err){
+					console.log('error- ', err);
+				});
+				
 			$scope.surveyConfirmation = true;
 			
 			var documentId = 'pdfDocument';
@@ -267,7 +337,6 @@ angular.module('bcbsnc.med.survey', ['ui.router'])
 			console.log('doc- ', doc);
 			doc.contentWindow.document.body.innerHTML = printedContent;
 			
-			// doc.srcdoc = printedContent;
 			doc.contentWindow.focus()
 			doc.contentWindow.print();
 		}
