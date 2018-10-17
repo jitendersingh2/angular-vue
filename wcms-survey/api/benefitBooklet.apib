@@ -1,0 +1,39 @@
+FORMAT: 1A
+
+# Sample Benefit Booklet API
+
+## Status [/members/services/DocumentService/getBBDocumentByProduct]
+
+### Get benefit booklet details [POST]
+
+
++ Response 200 (application/json)
+
+  + Headers
+
+        Accept: application/json,
+        Access-Control-Allow-Methods: POST
+
+  + Body
+
+
+[{
+   "docId":"321Z13Y_00TK0H7MT000YRQ",
+   "docType":"Benefit Booklets",
+   "productName":"Blue Local Bronze 7150 with Duke Medicine and WakeMed-OFF",
+   "productId":"B0004069",
+   "packageProductType":"MED"
+}]
+
+
++ Response 401 (application/json)
+
+  + Headers
+
+            Accept: application/json
+
+  + Body
+
+            {
+
+            }

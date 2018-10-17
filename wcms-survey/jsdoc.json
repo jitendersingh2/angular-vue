@@ -1,0 +1,17 @@
+{
+    "source": {
+        "include": [
+            "README.md",
+            "src/app.js",
+            "src/config.prod.js",
+            "src/components",
+            "src/services"
+        ],
+        "excludePattern": "_spec"
+    },
+    "opts": {
+        "destination": "./docs/",
+        "template": "node_modules/minami",
+        "recurse": true
+    }
+}
