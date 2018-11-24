@@ -1,0 +1,411 @@
+<div id="survey-first-ques-container" class="animated fadeIn" ng-controller="homeCtrl as surveyScope">
+    <p class="header">2019 ER Utilization Activity Survey</p>
+    <p class="header-content" ng-if="!surveyScope.rewardPage">
+        Do you know when it’s best to go to an urgent care center or an emergency department? Test your knowledge<br> about all of your care options and get a personalized Quick Reference Guide.
+    </p>
+
+    <p class="sub-header" ng-if="surveyScope.firstQPage || surveyScope.secondQPage"><img src="/assets/members/secure/apps/erusurvey/images/doctor.png" alt="Doctor Icon"> Your Doctor</p>
+    <p class="sub-header" ng-if="surveyScope.thirdQPage || surveyScope.fourthQPage"><img src="/assets/members/secure/apps/erusurvey/images/urgent-care.png" alt="Urgent Care Icon"> Convenience Care & Urgent Care Centers</p>
+    <p class="sub-header" ng-if="surveyScope.teleHealthPage"><img src="/assets/members/secure/apps/erusurvey/images/phone.png" alt="Telehealth Icon"> Telehealth</p>
+    <p class="sub-header" ng-if="surveyScope.healthLineBluePage"><img src="/assets/members/secure/apps/erusurvey/images/doctor-nurse.png" alt="Doctor-Nurse Icon"> Health Line Blue<sup>SM</sup></p>
+    <p class="header finish-header" ng-if="surveyScope.rewardPage">You are almost at the finish line...</p>
+    <p class="header-content" ng-if="surveyScope.rewardPage">
+        Just click the button below to submit your survey and create your personalized Quick Reference Guide.
+        Print it and hang it up so you’ll have a handy reminder of your care options!
+    </p>
+
+    <!-- First Question -->
+    <div class="first-question" ng-if="surveyScope.firstQPage">
+        <div class="sub-header-title">
+            <span class="content">
+                Your regular doctor should be your first point of contact for your health needs.<br>
+                Why is it important to have a regular doctor? (Select all that apply.)
+            </span>
+            <span>
+                <a href="/members/secure/account/erueducation/index.htm#/" target="_blank">Need help answering?</a>
+            </span>
+        </div>
+        <form>
+            <input type="checkbox" name="first_Q_1" value="'Knows your health history'" ng-click="surveyScope.insertFirstAnswers($event)"><span class="input-label">Knows your health history</span><br>
+            <input type="checkbox" name="first_Q_2" value="'Helps you prevent or manage long-term conditions (like diabetes or asthma)'" ng-click="surveyScope.insertFirstAnswers($event)"><span class="input-label">Helps you prevent or manage long-term conditions (like diabetes or asthma)<br>
+            <input type="checkbox" name="first_Q_3" value="'Helps you prevent or manage long-term conditions (like diabetes or asthma)'" ng-click="surveyScope.insertFirstAnswers($event)"><span class="input-label">Provides regular checkups</span><br>
+            <button type="button" class="btn-blue" ng-if="!surveyScope.hideSubmitBtn" ng-click="surveyScope.submitFirstAnswer($event)">Next</button>
+        </form>
+
+        <div class="answered-correctly" ng-if="surveyScope.showAnsweredCorrectly">
+            <br>
+            <b>You’re right — great job!</b>
+            <p>
+                There are many reasons why having a regular doctor is important. They know you and your health history.<br> They can also help you manage any health issues you may have. And they provide regular checkups so<br> you can stay up-to-date on vaccines, tests and other preventive care. Your primary doctor is your health
+                care partner!
+            </p>
+            <br>
+            <button type="button" class="btn-blue" ng-click="surveyScope.next2($event)">Continue</button>
+        </div>
+
+        <div class="answered-incorrectly" ng-if="surveyScope.showAnsweredInCorrectly">
+            <br>
+            <b>Oops — all of these are correct answers.</b>
+            <p>
+                There are many reasons why having a regular doctor is important. They know you and your health history.<br> They can also help you manage any health issues you may have. And they provide regular checkups so<br> you can stay up-to-date on vaccines, tests and other preventive care.
+            </p>
+            <br>
+            <button type="button" class="btn-blue" ng-click="surveyScope.next2($event)">Continue to next question</button>
+        </div>
+
+    </div>
+
+    <!-- Second Question -->
+    <div class="second-question" ng-if="surveyScope.secondQPage">
+        <p class="header-content">Do you have a regular doctor that you go to for routine checkups?</p><br>
+        <form>
+            <input type="radio" name="routineCheckUps" value="YES" ng-click="surveyScope.selectSecondAnswer($event)"><span class="input-label"> Yes</span><br>
+            <input type="radio" name="routineCheckUps" value="NO" ng-click="surveyScope.selectSecondAnswer($event)"><span class="input-label"> No</span><br>
+            <button type="button" class="btn-blue" ng-if="!surveyScope.hideSubmitBtn" ng-click="surveyScope.submitSecondAnswer($event)">Next</button>
+        </form>
+        <div ng-if="surveyScope.secondAnsweredNo">
+            <br>
+            <p>
+                <a href="/members/secure/doctors/search.htm" target="_blank">
+                    Open a new browser tab to find in-network doctors close to you.
+                </a>
+                (You can also find doctors using the Blue Cross<br> NC mobile app.) Once you’ve chosen a regular doctor, add their information to the Quick Reference Guide that<br> you get after this survey.
+            </p>
+            <br>
+            <button type="button" class="btn-blue" ng-click="surveyScope.next3($event)">Continue</button>
+        </div>
+        <div ng-if="surveyScope.secondAnsweredYes">
+            <br>
+            <b>Excellent!</b>
+            <p>Fill in your doctor’s information here — and we’ll add it to the Quick Reference Guide that you get after this<br> survey.</p>
+            <p>(<a href="/members/secure/doctors/search.htm" target="_blank">Open a new browser to look it up if needed.</a>)</p><br>
+            <p>Fields marked with * are required.</p><br>
+            <form ng-submit="surveyScope.next3($event)">
+                <span class="input-text-label">Doctor's Name*</span><input class="doctorName" name="doctorName" type="text" ng-model="surveyScope.doctorName" ng-keyup="surveyScope.onInputChange($event)" required="true"><br>
+                <span class="input-text-label">Phone Number*</span><input class="doctorPhoneNumber" type="text" name="doctorPhoneNumber" ng-model="surveyScope.doctorPhoneNumber" ng-keyup="surveyScope.onInputChange($event)" required="true"><br>
+                <span class="input-text-label">Office Hours</span><input class="officeHours" type="text" name="officeHours" ng-model="surveyScope.officeHours" ng-keyup="surveyScope.onInputChange($event)"><br>
+                <span class="input-text-label">After-Hours Number</span><input class="afterHoursNumber" type="text" name="afterHoursNumber" ng-model="surveyScope.afterHoursNumber" ng-keyup="surveyScope.onInputChange($event)"><br>
+                <button type="submit" class="btn-blue submit-2nd-Q">Submit and continue to next question</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Third Question -->
+    <div class="first-question" ng-if="surveyScope.thirdQPage">
+        <div class="sub-header-title">
+            <span class="content">
+                Convenience care and urgent care centers see you faster and cost a lot less than the emergency room.<br> Why else would you go to a convenience care or urgent care center? (Select all that apply.)
+            </span>
+            <span><a href="/members/secure/account/erueducation/index.htm#/" target="_blank">Need help answering?</a></span>
+        </div>
+
+        <form>
+            <input type="checkbox" name="first_Q_1" value="'Have a sudden injury and need a walk-in appointment'" ng-click="surveyScope.selectThirdAnswers($event)"><span class="input-label">Have a sudden injury and need a walk-in appointment</span><br>
+            <input type="checkbox" name="first_Q_2" value="'Need care when your doctor’s office is closed'" ng-click="surveyScope.selectThirdAnswers($event)"><span class="input-label">Need care when your doctor’s office is closed</span><br>
+            <input type="checkbox" name="first_Q_3" value="'Need a flu shot'" ng-click="surveyScope.selectThirdAnswers($event)"><span class="input-label">Need a flu shot</span><br>
+            <input type="checkbox" name="first_Q_3" value="'Have a minor health issue, like a sinus infection or the flu'" ng-click="surveyScope.selectThirdAnswers($event)"><span class="input-label">Have a minor health issue, like a sinus infection or the flu</span><br>
+            <button type="button" class="btn-blue" ng-if="!surveyScope.hideSubmitBtn" ng-click="surveyScope.submitThirdAnswer($event)">Next</button>
+        </form>
+
+        <div class="answered-correctly" ng-if="surveyScope.showThirdAnsweredCorrectly || surveyScope.showThirdAnsweredInCorrectly">
+            <br>
+            <b ng-if="surveyScope.showAnsweredCorrectly">Exactly!</b>
+            <b ng-if="surveyScope.showAnsweredInCorrectly">Oops — all of these are correct answers.</b>
+            <p>
+                Convenience care and urgent care centers are great options if you have a minor injury that requires
+                immediate care<br> — or if your regular doctor’s office is closed. Most offer extended hours,
+                including evenings and weekends. They can<br> treat minor health problems like sinus infections or the flu.
+                Some convenience care centers are housed within retail<br> stores, making them a quick and easy spot to
+                get your yearly flu shot. And they can save you a lot of time and money<br> compared to a trip to the ER.
+            </p>
+            <br>
+            <button type="button" class="btn-blue" ng-click="surveyScope.next4($event)">Continue</button>
+        </div>
+
+    </div>
+
+    <!-- Fourth Question -->
+    <div class="second-question" ng-if="surveyScope.fourthQPage">
+        <p class="header-content">Do you know which urgent care center is closest to your home?</p><br>
+        <form>
+            <input type="radio" name="careCenter" value="YES" ng-click="surveyScope.selectFourthAnswer($event)"><span class="input-label"> Yes</span><br>
+            <input type="radio" name="careCenter" value="NO" ng-click="surveyScope.selectFourthAnswer($event)"><span class="input-label"> No</span><br>
+            <button type="button" class="btn-blue" ng-if="!surveyScope.hideSubmitBtn" ng-click="surveyScope.submitFourthAnswer($event)">Next</button>
+        </form>
+        <div ng-if="surveyScope.fourthAnsweredNo">
+            <br>
+            <p>
+                <a href="/members/secure/doctors/search.htm" target="_blank">
+                    Open a new browser tab to find in-network doctors close to you.
+                </a>
+                You can always find urgent care centers wherever<br> you are by using the Blue Cross NC mobile app. Once you’ve chosen an urgent care center, add their<br> information to the Quick Reference Guide that you get after this survey.
+            </p>
+            <br>
+            <button type="button" class="btn-blue" ng-click="surveyScope.next5($event)">Continue</button>
+        </div>
+        <div ng-if="surveyScope.fourthAnsweredYes">
+            <br>
+            <b>Excellent!</b>
+            <p>Fill in that urgent care center’s details here — and we’ll add it to the Quick Reference Guide that you get after this<br> survey.</p>
+            <p>(<a href="/members/secure/doctors/search.htm" target="_blank">Open a new browser to look it up if needed.</a>)</p><br>
+            <p>Fields marked with * are required.</p><br>
+            <form ng-submit="surveyScope.next5($event)">
+                <span class="input-text-label">Name/Location*</span><input class="careCenterNameAndLocation" type="text" name="careCenterNameAndLocation" ng-model="surveyScope.careCenterNameAndLocation" ng-keyup="surveyScope.onInputChange($event)" required="true"><br>
+                <span class="input-text-label">Phone Number*</span><input class="careCenterPhoneNumber" type="text" name="careCenterPhoneNumber" ng-model="surveyScope.careCenterPhoneNumber" ng-keyup="surveyScope.onInputChange($event)"><br>
+                <span class="input-text-label">Hours</span><input class="careCenterOpeningHours" type="text" name="careCenterOpeningHours" ng-model="surveyScope.careCenterOpeningHours" ng-keyup="surveyScope.onInputChange($event)"><br>
+                <button type="submit" class="btn-blue submit-2nd-Q">Submit and continue to next question</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Telehealth -->
+    <div class="first-question" ng-if="surveyScope.teleHealthPage">
+        <div class="sub-header-title">
+            <span class="content">
+                Did you know that you can talk to a doctor about certain health issues using your computer, smartphone or<br> tablet?
+                It’s quick and easy. Which of these health issues could be handled by a telehealth consult? (Select<br> all that apply.)
+            </span>
+            <span>
+                <a href="/members/secure/account/erueducation/index.htm#/" target="_blank">Need help answering?</a>
+            </span>
+        </div>
+
+        <form>
+            <input type="checkbox" name="telehealth" value="'Seasonal Allergies'" ng-click="surveyScope.selectTeleHealthAnswers($event)"><span class="input-label">Seasonal Allergies</span><br>
+            <input type="checkbox" name="telehealth" value="'Rash'" ng-click="surveyScope.selectTeleHealthAnswers($event)"><span class="input-label">Rash</span><br>
+            <input type="checkbox" name="telehealth" value="'Chest Pain'" ng-click="surveyScope.selectTeleHealthAnswers($event)"><span class="input-label">Chest Pain</span><br>
+            <input type="checkbox" name="telehealth" value="'Cough'" ng-click="surveyScope.selectTeleHealthAnswers($event)"><span class="input-label">Cough</span><br>
+            <input type="checkbox" name="telehealth" value="'Headache'" ng-click="surveyScope.selectTeleHealthAnswers($event)"><span class="input-label">Headache</span><br>
+            <button type="button" class="btn-blue" ng-if="!surveyScope.hideSubmitBtn" ng-click="surveyScope.submitTeleHealthAnswers($event)">Next</button>
+        </form>
+
+        <div class="answered-correctly" ng-if="surveyScope.showTeleHealthAnsweredCorrectly || surveyScope.showTeleHealthAnsweredInCorrectly">
+            <br>
+            <b ng-if="surveyScope.showTeleHealthAnsweredCorrectly">You’re right!</b>
+            <b ng-if="surveyScope.showTeleHealthAnsweredInCorrectly">Not quite…</b>
+            <p>
+                Allergies, rashes, coughs and headaches are all conditions that a telehealth provider can handle.
+                Remember that if<br> you ever experience chest pain, you should call 911 or go to the nearest emergency room.
+            </p>
+            <br>
+            <button type="button" class="btn-blue" ng-click="surveyScope.next6($event)">Continue</button>
+        </div>
+    </div>
+
+    <!-- Health Line Blue -->
+    <div class="first-question" ng-if="surveyScope.healthLineBluePage">
+        <div class="sub-header-title">
+            <span class="content">
+                Blue Cross NC has a 24/7 nurse support line, Health Line Blue, that you can call to find out where to go<br> based on your symptoms.
+                Where can you find the phone number for our 24/7 nurse support line? (Select all<br> that apply.)
+            </span>
+            <span>
+                <a href="/members/secure/account/erueducation/index.htm#/" target="_blank">Need help answering?</a>
+            </span>
+        </div>
+
+        <form>
+            <input type="checkbox" name="telehealth" value="'Member ID Card'" ng-click="surveyScope.selectHealthLineBlueAnswers($event)"><span class="input-label">Member ID Card</span><br>
+            <input type="checkbox" name="telehealth" value="'Blue Cross NC mobile app'" ng-click="surveyScope.selectHealthLineBlueAnswers($event)"><span class="input-label">Blue Cross NC mobile app</span><br>
+            <input type="checkbox" name="telehealth" value="'Blue Connect'" ng-click="surveyScope.selectHealthLineBlueAnswers($event)"><span class="input-label">Blue Connect<sup>SM</sup></span><br>
+            <input type="checkbox" name="telehealth" value="'Benefit Booklet'" ng-click="surveyScope.selectHealthLineBlueAnswers($event)"><span class="input-label">Benefit Booklet</span><br>
+            <button type="button" class="btn-blue" ng-if="!surveyScope.hideSubmitBtn" ng-click="surveyScope.submitHealthLineBlueAnswers($event)">Next</button>
+        </form>
+
+        <div class="answered-correctly" ng-if="surveyScope.showHealthLineBlueAnsweredCorrectly || surveyScope.showHealthLineBlueAnsweredInCorrectly">
+            <br>
+            <b ng-if="surveyScope.showHealthLineBlueAnsweredCorrectly">You got it!</b>
+            <b ng-if="surveyScope.showHealthLineBlueAnsweredInCorrectly">Oops — all of these are correct answers.</b>
+            <p>
+                You can find the number to Health Line Blue — our 24/7 nurse support line — in many places.
+                It’s on your<br> member ID card, your benefit booklet, Blue Cross NC’s mobile app and the Blue Connect member site.
+                You<br> may still have the Health Line Blue magnet we sent you.
+                And you’ll also see it on the Quick Reference<br> Guide that you get after finishing this survey.
+                Be sure to save the number in your mobile phone so it’s handy<br> in the future!
+            </p>
+            <br>
+            <button type="button" class="btn-blue" ng-click="surveyScope.next7($event)">Continue</button>
+        </div>
+
+    </div>
+
+    <!-- Rewards -->
+    <div class="second-question" ng-if="surveyScope.rewardPage">
+
+        <p class="header finish-header">Your Doctor</p>
+        <p>Here is the doctor information you provided. Feel free to edit, if needed prior to the reference guide being printed as the next step.</p>
+        <br>
+        <form >
+            <span class="input-text-label">Doctor's Name*</span><input class="doctorName" name="doctorName" type="text" ng-model="surveyScope.doctorName" ng-keyup="surveyScope.onInputChange($event)" required="true"><br>
+            <span class="input-text-label">Phone Number*</span><input class="doctorPhoneNumber" type="text" name="doctorPhoneNumber" ng-model="surveyScope.doctorPhoneNumber" ng-keyup="surveyScope.onInputChange($event)" required="true"><br>
+            <span class="input-text-label">Office Hours</span><input class="officeHours" type="text" name="officeHours" ng-model="surveyScope.officeHours" ng-keyup="surveyScope.onInputChange($event)"><br>
+            <span class="input-text-label">After-Hours Number</span><input class="afterHoursNumber" type="text" name="afterHoursNumber" ng-model="surveyScope.afterHoursNumber" ng-keyup="surveyScope.onInputChange($event)"><br>
+        </form>
+
+        <p class="header finish-header">Convenience Care & Urgent Care Centers</p>
+        <p>Here is the convenience/urgent care center you provided. Feel free to edit, if needed prior to the reference guide being printed as the next step.</p>
+        <br>
+        <form>
+            <span class="input-text-label">Name/Location*</span><input class="careCenterNameAndLocation" type="text" name="careCenterNameAndLocation" ng-model="surveyScope.careCenterNameAndLocation" ng-keyup="surveyScope.onInputChange($event)" required="true"><br>
+            <span class="input-text-label">Phone Number*</span><input class="careCenterPhoneNumber" type="text" name="careCenterPhoneNumber" ng-model="surveyScope.careCenterPhoneNumber" ng-keyup="surveyScope.onInputChange($event)"><br>
+            <span class="input-text-label">Hours</span><input class="careCenterOpeningHours" type="text" name="careCenterOpeningHours" ng-model="surveyScope.careCenterOpeningHours" ng-keyup="surveyScope.onInputChange($event)"><br>
+        </form>
+        <br>
+
+        <button type="button" class="btn-blue submit-2nd-Q" ng-click="surveyScope.printCustomizedGuide()">
+            <span>Create My Quick Reference Guide</span>
+        </button>
+
+        <div class="survey-confirm-msg" ng-if="surveyScope.surveyConfirmation">
+            <p>
+                Thank you. You have completed the survey. Now use your personalized Quick Reference Guide when you need it.
+            </p>
+        </div>
+    </div>
+
+    <!-- Quick Reference Guide PDF Content  -->
+    <iframe
+        id="pdfDocument"
+        width="100%"
+        height="100%" />
+
+    <div id="printedCustimizedGuide" style="display: none;">
+        <div style="font-family: Arial;margin-top: -12px;">
+            <div class="first-header" style="display: inline-flex;">
+                <div class="header-title-0" style="font-size: 20px;color: lightseagreen;font-weight: 600;">Quick Reference Guide</div>
+                <img
+                    src="/assets/members/secure/apps/erusurvey/images/BCBSNC-logo-1.png"
+                    style="width: 300px;height: 40px;margin-left: 150px;"
+                    alt="BlueConnect">
+            </div>
+            <div class="header-title-1" style="font-size: 28px;color: darkgoldenrod;margin-top:-5px;">KNOW WHERE TO GO</div>
+            <div class="header-title-2" style="color: deepskyblue;font-size: 24px;margin-bottom: 5px;">The right place-for the right care-at the right time</div>
+
+            <div style="display: inline-flex;background-color: aliceblue;margin-bottom: 5px;">
+                <div style="background-color: white;padding: 5px;width: 50%;margin: 5px;">
+                    <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">HEALTH LINE BLUE<sup>SM</sup></div>
+                    <div style="font-size: 14px;">
+                        YOUR GO-TO EXPERTS. Get answers to your health question fast, freaa and 24/7. A nurse can help you get relief and treat
+                        symptoms at home, or direct you to the care you need. Save this number in phone for easy access!
+                    </div>
+                    <h3 style="font-weight: 600;">1-877-477-2424 (toll-free)</h3>
+                    <h3 style="font-weight: 600;margin-bottom: -5px;">24 hours a day, 7 days a week</h3>
+                </div>
+                <div style="padding: 5px;width: 50%">
+                    <div style="font-size: 16px;color: darkblue;font-weight: 700;margin-bottom: 10px;">
+                        A great call when you think you need care right away.
+                    </div>
+                    <div style="font-size: 14px;border-bottom: 1px solid skyblue;margin-bottom: 10px;">
+                        CALL IF YOU:
+                    </div>
+                    <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Aren't you sure where to go</p>
+                    <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Want to treat your illness or injury at home</p>
+                    <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Have health questions</p>
+                </div>
+            </div>
+
+            <div style="display: inline-flex;background-color: aliceblue;margin-bottom: 5px;">
+                <div style="background-color: white;padding: 5px;width: 50%;margin: 5px;">
+                    <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">MY DOCTOR</div>
+                    <div style="font-size: 14px;">
+                        YOUR HEALTH CARE PARTNER. A primary doctor knows your health history-often resulting in better care over time
+                        and better prevention of health problems in the future. You will generally save money, time and hassle as well.
+                    </div>
+                    <p>
+                        <span class="input-text-label">Name: </span> <span style="display: inline-block;width: 81.2%;border-bottom: 1px solid darkgrey;">{{ surveyScope.doctorName }}</span>
+                    </p>
+                    <p>
+                        <span class="input-text-label">Phone: </span> <span style="display: inline-block;width: 80%;border-bottom: 1px solid darkgrey;">{{ surveyScope.doctorPhoneNumber }}</span>
+                    </p>
+                    <p>
+                        <span class="input-text-label">Hours: </span> <span style="display: inline-block;width: 81.2%;border-bottom: 1px solid darkgrey;">{{ surveyScope.officeHours }}</span>
+                    </p>
+                    <p style="margin-bottom: -5px;">
+                        <span class="input-text-label">After-Hours #: </span> <span style="display: inline-block;width: 66.25%;border-bottom: 1px solid darkgrey;">{{ surveyScope.afterHoursNumber }}</span>
+                    </p>
+                </div>
+                <div style="padding: 5px;width: 50%">
+                    <div style="font-size: 16px;color: darkblue;font-weight: 700;margin-bottom: 10px;">
+                        If it's not a life threatening emergency, your primary doctor is usually the best option.
+                    </div>
+                    <div style="font-size: 14px;border-bottom: 1px solid skyblue;margin-bottom: 10px;">
+                        CALL IF YOU:
+                    </div>
+                    <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Have an illness, injury, pain or health issue</p>
+                    <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Need a prescription or refill</p>
+                    <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Have a long term condition like high blood pressure, diabetes or asthma</p>
+                    <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Want to prevent problems (preventing care, like checkups or vaccines)</p>
+                </div>
+            </div>
+
+            <div style="display: inline-flex;background-color: aliceblue;">
+                <div style="background-color: white;padding: 5px;width: 50%;margin: 5px;">
+                    <div style="font-size: 24px;color: darkblue;font-weight: 700;margin-bottom: 10px;">URGENT CARE</div>
+                    <div style="font-size: 14px;">
+                        YOUR BACK UP OPTION. Urgent care center can be a time and money-saver when you have non-life-threatening illnesses or
+                        injuries-but you are not able to visit your doctor. Ideal for walk-ins, after-hours and weekends.
+                    </div><br>
+                    <p>
+                        <span class="input-text-label">Location: </span> <span style="display: inline-block;width: 76.8%;border-bottom: 1px solid darkgrey;">{{ surveyScope.careCenterNameAndLocation }}</span>
+                    </p>
+                    <p>
+                        <span class="input-text-label">Phone: </span> <span style="display: inline-block;width: 81%;border-bottom: 1px solid darkgrey;">{{ surveyScope.careCenterPhoneNumber }}</span>
+                    </p>
+                    <p style="margin-bottom: -5px;">
+                        <span class="input-text-label">Hours: </span> <span style="display: inline-block;width: 82%;border-bottom: 1px solid darkgrey;">{{ surveyScope.careCenterOpeningHours }}</span>
+                    </p>
+                </div>
+                <div style="padding: 5px;width: 50%">
+                    <div style="font-size: 16px;color: darkblue;font-weight: 700;margin-bottom: 10px;">
+                        If your doctor care can't see you today or the office is closed, urgent care is an option for issues that can't wait.
+                    </div>
+                    <div style="font-size: 14px;border-bottom: 1px solid skyblue;margin-bottom: 10px;">
+                        CALL IF YOU:
+                    </div>
+                    <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Can't wait until your doctor is available to treat you</p>
+                    <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Have a sudden injury and need a walk-in appointment</p>
+                    <p><span style="color: skyblue;">&#43;</span>&nbsp;&nbsp;&nbsp;Need care after-hours or on weekends and your doctor is closed</p>
+                </div>
+            </div>
+
+            <div style="background-color: white;margin-bottom: 0px;">
+                <div style="display: inline-flex;font-size: 14px;width: 100%;margin: 10px;">
+                    <div style="width: 95%;">
+                        Remember: If you have an issue that threatens your life or health, never wait.
+                        Call 911 or go straight to the emergency room.
+                    </div>
+                    <div style="display: inline-flex;">
+                        <div style="margin-left: 5px;margin-right: 10px;">
+                            <img
+                                src="/assets/members/secure/apps/erusurvey/images/mouse-solid.png"
+                                style="width: 30px;height: 30px;"
+                                alt="MouseSolid">
+                        </div>
+                        <div>
+                            Learn more about your opinions at <i style="color: skyblue;font-weight: 700;">bcbsnc.com/CareOptions</i>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-left: 10px;margin-right: 10px;margin-top: -5px;">
+                    <b>This is not a medical advice. Consult a medical professional and seek assistance in an emergency.</b>
+                </div>
+
+                <div style="margin-left: 10px;margin-right: 10px;margin-top: -5px;">
+                    <p style="font-size: 9px; color: lightgray;">
+                        Blue Cross and Blue Shield of North Carolina (Blue Cross NC) provides the Health Line Blue program for your convenience and is not liable in any way for the goods or services received. Blue Cross NC reserves the right to discontinue or change the program at any time.
+                        Decisions regarding your care should be made with the advice of your doctor.
+                    </p>
+                </div>
+
+                <div style="margin-left: 10px;margin-right: 10px;margin-top: -5px;">
+                    <p style="font-size: 9px; color: lightgray;">
+                        BLUE CROSS®, BLUE SHIELD®, the Cross and Shield symbols, and service marks are marks of the Blue Cross and Blue Shield Association, an association of independent Blue Cross and Blue Shield Plans. Blue Cross NC is an independent licensee of the Blue
+                        Cross and Blue Shield Association. U12242b, 6/17
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

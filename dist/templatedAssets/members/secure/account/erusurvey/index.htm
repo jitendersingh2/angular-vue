@@ -1,0 +1,60 @@
+#parse("members/secure/header-logic.htm")
+#if($loggedInMember && $cookies.LDAPUserID.value)
+#set($pageNav = "eru-survey")
+
+<!doctype html>
+<html lang="en-US" class="no-js">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <title>Blue Connect - Blue Cross and Blue Shield of North Carolina</title>
+
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/assets/global/css/classic.css">
+        <link rel="stylesheet" href="/assets/global/fonts/univers.css">
+        <link rel="stylesheet" href="/assets/global/css/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/assets/global/dist/css/fontcustom.css">
+        <link rel="stylesheet" href="/assets/members/secure/apps/erusurvey/css/app.css">
+        <script src="/assets/global/js/libs/jquery/1.11.0/jquery-1.11.0.min.js"></script>
+    </head>
+
+    <body id="analytics-enabled">
+        <!-- header -->
+        #parse("members/secure/header-responsive-classic.htm")
+        <!-- content -->
+        <div class="bcbsnc-app">
+            <div class="page-title-container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 content">
+                            <h1>ERU SURVEY</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container body-container">
+                <div class="row">
+                    <div id="main_content" tabindex="-1" class="col-lg-10 col-md-9 col-xs-12 content">
+                        <div data-ng-app="erusurvey">
+                            <div data-ng-view></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer -->
+        #parse("members/secure/footer-responsive-classic.htm")
+        <!-- library includes -->
+        <script src="/assets/global/js/libs/bootstrap/3.1.1/bootstrap.min.js"></script>
+        <script src="/assets/global/js/libs/angular/1.5.6/angular.js"></script>
+        <script src="/assets/global/js/libs/angular/1.5.6/angular-route.min.js"></script>
+        <script src="/assets/global/js/libs/moment/2.17.1/moment.min.js"></script>
+        <!-- start AngularJS app -->
+        <script src="/assets/members/secure/apps/erusurvey/app.min.js"></script>
+    </body>
+</html>
+
+#end

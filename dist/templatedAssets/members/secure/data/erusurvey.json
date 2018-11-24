@@ -1,0 +1,22 @@
+#parse("members/secure/velocityData/data.vm")
+#if($loggedInMember && $cookies.LDAPUserID.value)
+{
+
+    #if($loggedInMember.getAttribute('enterprisePersonId'))
+        "personId" : "${loggedInMember.getAttribute('enterprisePersonId')}",
+    #else
+        "personId" : "",
+    #end
+
+    "firstName": "${loggedInMember.defaultMember.firstName}",
+    "lastName": "${loggedInMember.defaultMember.lastName}",
+    "externalMemberId": "${loggedInMember.defaultMember.externalID}",
+    "timestamp": "${date.get('yyyy-MM-dd HH:mm:ssZ')}",
+    "ruid" : "${loggedInMember.defaultMember.ruid}",
+    "userID": "$cookies.LDAPUserID",
+    "telehealth": "$wo.feature.telehealth",
+    "healthLineBlue": "$wo.feature.healthLineBlue"
+}
+#else
+{}
+#end
